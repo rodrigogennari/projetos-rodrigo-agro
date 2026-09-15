@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cronograma TN Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/2.8.0/countUp.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/split-type@0.3.4/umd/index.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: auto; }
+
+:root{
+  --bg-0:      #060907;
+  --bg-1:      #0A1710;
+  --bg-2:      #0F2A1B;
+  --bg-3:      #14361F;
+  --surface:       linear-gradient(160deg, rgba(255,255,255,.05), rgba(255,255,255,.015));
+  --surface-solid: #0D1712;
+  --surface-2:     #101B14;
+  --border:    rgba(232,244,236,.12);
+  --border-soft: rgba(232,244,236,.07);
+  --text:      #F3F7F3;
+  --text-2:    #A9C2B4;
+  --text-3:    #6E8A79;
+
+  --accent:      #2FBE72;
+  --accent-soft: rgba(47,190,114,.14);
+  --accent-2:    #7BE3A6;
+  --gold:        #E8B84B;
+  --gold-soft:   rgba(232,184,75,.14);
+  --coral:       #F0665A;
+  --coral-soft:  rgba(240,102,90,.14);
+  --silver:      #C9D6CE;
+
+  --status-good: #2FBE72;
+  --status-warn: #E8B84B;
+  --status-crit: #F0665A;
+  --status-info: #C9D6CE;
+
+  --shadow:    0 1px 2px rgba(0,0,0,.4);
+  --shadow-lg: 0 24px 60px rgba(0,0,0,.55);
+  --radius:    14px;
+  --radius-sm: 9px;
+
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Manrope', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'Consolas', monospace;
+
+  --ease: cubic-bezier(.22,.78,.24,1);
+}
+
+body{
+  margin: 0;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15.5px;
+  line-height: 1.6;
+  padding-inline: max(18px, calc((100vw - 1080px) / 2));
+  background:
+    radial-gradient(1100px 620px at 82% -8%, rgba(47,190,114,.16), transparent 60%),
+    radial-gradient(900px 700px at -10% 30%, rgba(20,54,31,.5), transparent 55%),
+    linear-gradient(190deg, var(--bg-0) 0%, var(--bg-1) 46%, var(--bg-2) 78%, var(--bg-3) 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+@media (max-width: 700px){
+  body{ background-attachment: scroll; }
+}
+
+h1,h2,h3,h4{ font-family: var(--font-display); text-wrap: balance; margin: 0; color: var(--text); }
+p{ margin: 0; }
+a{ color: var(--accent-2); text-decoration-color: rgba(123,227,166,.4); text-underline-offset: 3px; }
+a:hover{ text-decoration-color: currentColor; }
+::selection{ background: var(--accent); color: #052013; }
+
+:focus-visible{ outline: 2px solid var(--accent-2); outline-offset: 3px; border-radius: 4px; }
+
+.wrap{ max-width: 1080px; margin: 0 auto; position: relative; }
+
+.skip-link{
+  position: absolute; left: 12px; top: -60px; z-index: 100;
+  background: var(--accent); color: #052013; font-weight: 700;
+  padding: 10px 16px; border-radius: 8px; transition: top .2s var(--ease);
+}
+.skip-link:focus{ top: 12px; }
+
+/* ── Progress bar ── */
+.progress-rail{ position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: rgba(255,255,255,.06); z-index: 50; }
+.progress-fill{ height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); box-shadow: 0 0 12px rgba(47,190,114,.6); }
+
+/* ── Rail nav (desktop only) ── */
+.railnav{
+  position: fixed; right: 22px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 2px; z-index: 40;
+}
+.railnav a{
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; position: relative;
+}
+.railnav a::before{
+  content: ''; width: 9px; height: 9px; border-radius: 50%; background: rgba(232,244,236,.25);
+  transition: background .25s var(--ease), transform .25s var(--ease);
+}
+.railnav a:hover::before, .railnav a:focus-visible::before{ background: var(--accent-2); transform: scale(1.35); }
+.railnav a[data-active]::before{ background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+.railnav a .tip{
+  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+  background: var(--surface-solid); border: 1px solid var(--border); color: var(--text-2);
+  font-family: var(--font-mono); font-size: 11px; white-space: nowrap;
+  padding: 5px 10px; border-radius: 6px; opacity: 0; pointer-events: none;
+  transition: opacity .18s ease;
+}
+.railnav a:hover .tip, .railnav a:focus-visible .tip{ opacity: 1; }
+@media (max-width: 960px){ .railnav{ display: none; } }
+
+/* ── Topbar ── */
+.topbar{
+  position: sticky; top: 3px; z-index: 30;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+  padding-block: 16px;
+  background: linear-gradient(180deg, rgba(6,9,7,.86) 70%, transparent);
+  backdrop-filter: blur(10px);
+}
+.topbar .brand{ font-family: var(--font-display); font-size: 16px; font-weight: 600; letter-spacing: .01em; white-space: nowrap; }
+.topbar .brand em{ font-style: normal; color: var(--accent-2); }
+.topbar .running{
+  font-family: var(--font-mono); font-size: 11.5px; color: var(--text-3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: right;
+}
+.topbar .running b{ color: var(--text-2); font-weight: 500; }
+
+/* ── Hero ── */
+.hero{ padding-block: 56px 34px; }
+.eyebrow{
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent-2);
+  margin-bottom: 22px;
+}
+.eyebrow::before{ content: ''; width: 22px; height: 1px; background: var(--accent); }
+.hero h1{
+  font-size: clamp(34px, 5.4vw, 58px); font-weight: 600; letter-spacing: -.015em; line-height: 1.06;
+  max-width: 16ch;
+}
+.hero h1 em{ font-style: italic; font-weight: 500; color: var(--accent-2); }
+.split-char{ display: inline-block; will-change: transform, opacity; }
+.hero .lead{ margin-top: 22px; max-width: 56ch; color: var(--text-2); font-size: 17px; line-height: 1.65; }
+.hero .source{
+  margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 26px;
+  font-family: var(--font-mono); font-size: 12.5px; color: var(--text-3);
+}
+.hero .source b{ color: var(--silver); font-weight: 500; }
+
+/* ── Stat strip (not cards, editorial strip) ── */
+.stat-strip{
+  display: grid; grid-template-columns: repeat(6, 1fr);
+  margin-block: 18px 40px;
+  border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft);
+}
+.stat{
+  padding: 22px 18px; border-left: 1px solid var(--border-soft);
+}
+.stat:first-child{ border-left: none; padding-left: 0; }
+.stat .num{
+  font-family: var(--font-display); font-size: 32px; font-weight: 600; font-variant-numeric: tabular-nums;
+  line-height: 1; color: var(--text);
+}
+.stat .num small{ font-size: 16px; font-weight: 500; color: var(--text-2); margin-left: 1px; }
+.stat.flag .num{ color: var(--gold); }
+.stat .lbl{ margin-top: 9px; font-size: 12px; color: var(--text-3); line-height: 1.4; }
+
+/* ── Sections ── */
+section{ padding-block: 46px; border-top: 1px solid var(--border-soft); }
+section:first-of-type{ border-top: none; }
+.sec-head{ margin-bottom: 26px; scroll-margin-top: 90px; }
+.sec-head .tag{
+  font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--text-3);
+}
+.sec-head h2{ font-size: 27px; font-weight: 600; margin-top: 6px; letter-spacing: -.01em; }
+.sec-head p{ margin-top: 10px; color: var(--text-2); max-width: 66ch; font-size: 15px; }
+
+.reveal{ opacity: 1; }
+@media (prefers-reduced-motion: no-preference){
+  .js-anim .reveal{ opacity: 0; transform: translateY(18px); }
+}
+
+/* ── Glass surface ── */
+.glass{
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ── Explainer spec sheets ── */
+.doc-grid{ display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-soft); border-radius: var(--radius); overflow: hidden; }
+.doc-card{ background: var(--surface-solid); padding: 26px 24px; }
+.doc-card .tab-name{
+  display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 11.5px;
+  color: var(--text-3); margin-bottom: 14px; letter-spacing: .04em; text-transform: uppercase;
+}
+.doc-card .tab-name::before{ content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.doc-card h3{ font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+.doc-card p{ color: var(--text-2); font-size: 14px; }
+.doc-card .facts{ margin: 16px 0 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.doc-card .facts li{ display: flex; gap: 10px; font-size: 13.5px; color: var(--text-2); align-items: baseline; }
+.doc-card .facts li::before{ content: '\2013'; color: var(--text-3); flex: 0 0 auto; }
+.doc-card .facts b{ color: var(--silver); font-weight: 600; }
+@media (max-width: 760px){ .doc-grid{ grid-template-columns: 1fr; } }
+
+/* ── Phase rail (sequence, numbered on purpose: real chronology) ── */
+.phase-rail{ position: relative; }
+.phase-rail .line{
+  position: absolute; left: 0; right: 0; top: 19px; height: 1px;
+  background: linear-gradient(90deg, var(--border), transparent 98%);
+}
+.phase-track{ display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; position: relative; }
+.phase{ padding-right: 10px; }
+.phase .node{
+  width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--bg-0);
+  background: var(--phase-color, var(--accent)); margin-bottom: 16px; position: relative; z-index: 2;
+  box-shadow: 0 0 0 5px var(--bg-1);
+}
+.phase h4{ font-size: 14px; font-weight: 600; line-height: 1.3; min-height: 38px; color: var(--text); }
+.phase .count{ margin-top: 12px; font-size: 12px; color: var(--text-3); }
+.phase .count b{ color: var(--silver); font-family: var(--font-mono); font-weight: 600; }
+.phase .weeks{ margin-top: 5px; font-family: var(--font-mono); font-size: 12px; color: var(--phase-color, var(--accent)); font-weight: 500; }
+@media (max-width: 860px){
+  .phase-track{ grid-template-columns: repeat(3, 1fr); row-gap: 30px; }
+  .phase-rail .line{ display: none; }
+}
+@media (max-width: 520px){ .phase-track{ grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Gantt ── */
+.gantt-card{ padding: 26px 26px 20px; }
+.gantt-scroll{ overflow-x: auto; }
+.gantt-inner{ min-width: 720px; }
+#ganttChart{ width: 100%; }
+.legend{ display: flex; flex-wrap: wrap; gap: 9px 20px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border-soft); }
+.legend .item{ display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-2); font-family: var(--font-mono); }
+.legend .sw{ width: 10px; height: 10px; border-radius: 3px; flex: 0 0 auto; }
+
+/* ── Table ── */
+.table-card{ overflow: hidden; }
+.table-scroll{ overflow-x: auto; }
+table{ width: 100%; border-collapse: collapse; min-width: 900px; font-size: 13.5px; }
+thead th{
+  text-align: left; font-family: var(--font-mono); font-size: 11px; letter-spacing: .05em; text-transform: uppercase;
+  color: var(--text-3); background: var(--surface-solid); padding: 14px 16px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 1;
+}
+tbody td{ padding: 14px 16px; border-bottom: 1px solid var(--border-soft); vertical-align: top; }
+tbody tr:last-child td{ border-bottom: none; }
+tbody tr{ transition: background .15s ease; }
+tbody tr:hover{ background: rgba(255,255,255,.025); }
+td.item{ font-family: var(--font-mono); color: var(--text-3); white-space: nowrap; }
+td.tarefa{ font-weight: 600; min-width: 220px; color: var(--text); }
+td.objetivo{ color: var(--text-2); max-width: 340px; }
+td.semana{ font-family: var(--font-mono); white-space: nowrap; color: var(--silver); }
+
+.pill{
+  display: inline-flex; align-items: center; gap: 5px; font-size: 11.5px; font-weight: 600;
+  padding: 3px 10px; border-radius: 999px; white-space: nowrap; font-family: var(--font-mono);
+}
+.pill-status{ background: var(--gold-soft); color: var(--gold); }
+.pill-gap{ background: var(--coral-soft); color: var(--coral); }
+.pill-phase{ font-size: 11px; padding: 2px 9px; border-radius: 6px; font-family: var(--font-body); font-weight: 600; }
+
+/* ── Findings ── */
+.findings{ display: flex; flex-direction: column; gap: 1px; background: var(--border-soft); border-radius: var(--radius); overflow: hidden; }
+.finding{
+  background: var(--surface-solid);
+  padding: 20px 24px; display: grid; grid-template-columns: 190px 1fr; gap: 22px; align-items: start;
+  border-left: 3px solid var(--sev-color, var(--status-info));
+}
+.finding .sev{
+  display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-mono); font-size: 10.5px;
+  letter-spacing: .06em; text-transform: uppercase; color: var(--sev-color, var(--status-info));
+}
+.finding .sev::before{ content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--sev-color, var(--status-info)); flex: 0 0 auto; }
+.finding .ref{ display: block; margin-top: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--text-3); }
+.finding h4{ font-size: 15.5px; font-weight: 600; margin-bottom: 6px; }
+.finding p{ font-size: 13.5px; color: var(--text-2); }
+@media (max-width: 700px){
+  .finding{ grid-template-columns: 1fr; gap: 10px; }
+}
+
+/* ── Recommendations ── */
+.reco-list{ display: flex; flex-direction: column; }
+.reco{
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 20px 4px; border-bottom: 1px solid var(--border-soft);
+}
+.reco:last-child{ border-bottom: none; }
+.reco .n{
+  flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent-2); font-family: var(--font-mono); font-weight: 600; font-size: 13px;
+  display: flex; align-items: center; justify-content: center; margin-top: 2px;
+}
+.reco .body h5{ font-size: 15px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
+.reco .body p{ font-size: 13.5px; color: var(--text-2); }
+
+/* ── Footer ── */
+footer{ padding-block: 34px 60px; color: var(--text-3); font-size: 12.5px; }
+footer .fline{ display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; padding-top: 20px; border-top: 1px solid var(--border-soft); }
+footer .back{ font-family: var(--font-mono); color: var(--text-2); }
+
+/* ── Responsive ── */
+@media (max-width: 860px){
+  .stat-strip{ grid-template-columns: repeat(3, 1fr); }
+  .stat:nth-child(4){ border-left: none; }
+}
+@media (max-width: 520px){
+  .stat-strip{ grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3), .stat:nth-child(5){ border-left: none; }
+  .topbar .running{ display: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+<div class="progress-rail" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+<nav class="railnav" aria-label="Navegação por seção" id="railnav"></nav>
+
+<div class="wrap">
+
+  <div class="topbar">
+    <span class="brand">Cronograma <em>TN Manager</em></span>
+    <span class="running" id="runningLabel">01 &middot; Estrutura do arquivo</span>
+  </div>
+
+  <main id="main">
+
+  <section class="hero" id="topo">
+    <span class="eyebrow">Guia de leitura</span>
+    <h1 id="heroTitle">O que a planilha do TN Manager está <em>dizendo</em></h1>
+    <p class="lead">A planilha tem duas abas: uma tabela de controle detalhado e um Gantt macro de 12 semanas. Nenhuma tarefa foi iniciada, nenhum responsável foi atribuído e as duas abas descrevem o plano de forma ligeiramente diferente. Este documento organiza os dois lados e aponta o que precisa de decisão antes de rodar.</p>
+    <div class="source">
+      <span>Arquivo <b>2026.05.03 - Cronograma TN Manager.xlsx</b></span>
+      <span>Abas <b>Cronograma-PA</b> e <b>Macro Cronograma</b></span>
+      <span>Leitura gerada em <b>14/09/2026</b></span>
+    </div>
+  </section>
+
+  <div class="stat-strip" id="statStrip">
+    <div class="stat"><div class="num"><span class="cnt" data-count="12">0</span></div><div class="lbl">Semanas de execução</div></div>
+    <div class="stat"><div class="num"><span class="cnt" data-count="5">0</span></div><div class="lbl">Fases estratégicas</div></div>
+    <div class="stat"><div class="num"><span class="cnt" data-count="12">0</span></div><div class="lbl">Tarefas na aba de controle</div></div>
+    <div class="stat"><div class="num"><span class="cnt" data-count="12">0</span></div><div class="lbl">Atividades no Gantt macro</div></div>
+    <div class="stat flag"><div class="num"><span class="cnt" data-count="0">0</span><small>%</small></div><div class="lbl">Progresso registrado</div></div>
+    <div class="stat flag"><div class="num"><span class="cnt" data-count="0">0</span></div><div class="lbl">Responsáveis definidos</div></div>
+  </div>
+
+  <section id="doc">
+    <div class="sec-head reveal">
+      <span class="tag">01 &middot; Estrutura do arquivo</span>
+      <h2>Duas abas, dois papéis diferentes</h2>
+      <p>As duas abas não duplicam a mesma informação: uma é o controle de execução, a outra é a visão de calendário.</p>
+    </div>
+    <div class="doc-grid reveal glass">
+      <div class="doc-card">
+        <span class="tab-name">Aba: Cronograma-PA</span>
+        <h3>Tabela de controle e status</h3>
+        <p>Uma linha por tarefa, com o código de item (2.1, 3.2, 5.1...), a fase (Tópico), o nome da tarefa, o objetivo por extenso, e colunas para acompanhar execução real: Responsável, Facilitador-TN, Início/Término Previsto e Real, Variação, Status e Farol.</p>
+        <ul class="facts">
+          <li><b>12 linhas</b> de tarefa, nenhuma data preenchida</li>
+          <li>Status de todas as linhas: <b>A iniciar</b></li>
+          <li>Responsável e Facilitador-TN: <b>vazios em 100%</b> das linhas</li>
+          <li>Farol: <b>"F" sem cor</b> aplicada em nenhuma linha</li>
+        </ul>
+      </div>
+      <div class="doc-card">
+        <span class="tab-name">Aba: Macro Cronograma</span>
+        <h3>Gantt semanal (S1 a S12)</h3>
+        <p>Uma grade de 12 semanas em colunas, com uma barra por atividade macro. A semana em que a atividade acontece aparece destacada em cinza claro sobre um fundo verde; não há datas de calendário, só a posição relativa dentro das 12 semanas.</p>
+        <ul class="facts">
+          <li><b>12 barras</b> de atividade, cada uma com 1 a 3 semanas de duração</li>
+          <li>Sem coluna de responsável ou de status</li>
+          <li>Semana 1 abre com <b>"Assinatura do NDA e contrato"</b>, ausente do controle</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="fases">
+    <div class="sec-head reveal">
+      <span class="tag">02 &middot; Fases</span>
+      <h2>As 5 fases declaradas na coluna Tópico</h2>
+      <p>A aba de controle agrupa as 12 tarefas em 5 fases, numeradas de 2 a 6 na própria planilha (não existe fase 1: a assinatura de contrato aparece só no Gantt, tratada como um passo anterior ao início oficial do controle).</p>
+    </div>
+    <div class="phase-rail reveal">
+      <div class="line" aria-hidden="true"></div>
+      <div class="phase-track" id="phaseTrack"></div>
+    </div>
+  </section>
+
+  <section id="gantt">
+    <div class="sec-head reveal">
+      <span class="tag">03 &middot; Linha do tempo</span>
+      <h2>As 12 semanas, atividade por atividade</h2>
+      <p>Reconstrução do Gantt da aba Macro Cronograma. A cor indica a fase; a posição e o comprimento da barra indicam em qual semana, ou intervalo de semanas, a atividade está marcada na planilha original.</p>
+    </div>
+    <div class="gantt-card reveal glass">
+      <div class="gantt-scroll">
+        <div class="gantt-inner">
+          <canvas id="ganttChart" height="380" role="img" aria-label="Gráfico de Gantt com as 12 atividades do projeto distribuídas ao longo de 12 semanas, coloridas por fase. Os mesmos dados estão na tabela da seção seguinte."></canvas>
+        </div>
+      </div>
+      <div class="legend" id="ganttLegend"></div>
+    </div>
+  </section>
+
+  <section id="tarefas">
+    <div class="sec-head reveal">
+      <span class="tag">04 &middot; Detalhe</span>
+      <h2>As 12 tarefas da aba de controle</h2>
+      <p>Mesma ordem e conteúdo da aba Cronograma-PA, com a semana do Gantt cruzada por nome de atividade. Uma linha não tem semana correspondente; está sinalizada abaixo.</p>
+    </div>
+    <div class="table-card reveal glass">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Fase</th>
+              <th scope="col">Tarefa</th>
+              <th scope="col">Objetivo</th>
+              <th scope="col">Semana</th>
+              <th scope="col">Status</th>
+              <th scope="col">Responsável</th>
+            </tr>
+          </thead>
+          <tbody id="taskTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="alertas">
+    <div class="sec-head reveal">
+      <span class="tag">05 &middot; Pontos de atenção</span>
+      <h2>O que as duas abas não combinam entre si</h2>
+      <p>Seis observações que saem direto da comparação célula a célula entre Cronograma-PA e Macro Cronograma.</p>
+    </div>
+    <div class="findings reveal" id="findingsGrid"></div>
+  </section>
+
+  <section id="recomendacoes">
+    <div class="sec-head reveal">
+      <span class="tag">06 &middot; Antes de colocar em execução</span>
+      <h2>O que vale ajustar nesta planilha</h2>
+      <p>Seis ajustes concretos, na ordem que mais ajudaria a transformar este plano estático em um cronograma que acompanha a execução.</p>
+    </div>
+    <div class="reco-list reveal glass" id="recoList" style="padding: 6px 24px;"></div>
+  </section>
+
+  </main>
+
+  <footer>
+    <p>Leitura estruturada de <b style="color:var(--silver)">2026.05.03 - Cronograma TN Manager.xlsx</b> (abas Cronograma-PA e Macro Cronograma). Nenhum valor de data, responsável ou status foi presumido além do que está escrito na planilha original.</p>
+    <div class="fline">
+      <span>Projetos Rodrigo Agro</span>
+      <a class="back" href="#topo">Voltar ao topo</a>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+/* ============ DATA ============
+   Extraído célula a célula das duas abas da planilha original. */
+
+const PHASES = [
+  { name: 'Pré-projeto', color: '#3987E5', tasks: [] },
+  { name: 'Base Estratégica', color: '#D95926', tasks: [] },
+  { name: 'Produto e Direcionamento', color: '#199E70', tasks: [] },
+  { name: 'Diagnóstico', color: '#C98500', tasks: [] },
+  { name: 'Consolidação da Estratégia', color: '#D55181', tasks: [] },
+  { name: 'Validações', color: '#9085E9', tasks: [] },
+];
+
+const TASKS = [
+  { item: '-',    fase: 0, tarefa: 'Assinatura do NDA e contrato', objetivo: 'Não descrita na aba de controle detalhado; a tarefa existe apenas no Gantt macro.', s1: 1, s2: 1, status: 'A iniciar', resp: '', inControle: false },
+  { item: '2.1',  fase: 1, tarefa: 'Análise de Business Case', objetivo: 'Clarificar onde o produto gera valor e para quem.', s1: 2, s2: 3, status: 'A iniciar', resp: '', inControle: true },
+  { item: '2.1.1',fase: 1, tarefa: 'Entrevista com os stakeholders', objetivo: 'Avaliar o nível de aderência e entendimento do projeto dos principais influenciadores de avanço/paraquedas.', s1: null, s2: null, status: 'A iniciar', resp: '', inControle: true },
+  { item: '2.2',  fase: 1, tarefa: 'Discovery com clientes (incluindo detratores)', objetivo: 'Entender percepção real de valor e dores.', s1: 3, s2: 3, status: 'A iniciar', resp: '', inControle: true },
+  { item: '3.1',  fase: 2, tarefa: 'Imersão técnica (Software House)', objetivo: 'Entender profundamente arquitetura e limitações.', s1: 4, s2: 4, status: 'A iniciar', resp: '', inControle: true },
+  { item: '3.2',  fase: 2, tarefa: 'Revisão de backlog (PRDs)', objetivo: 'Priorizar o que realmente gera valor.', s1: 5, s2: 7, status: 'A iniciar', resp: '', inControle: true },
+  { item: '4.1',  fase: 3, tarefa: 'Construção de SWOT', objetivo: 'Separar o que funciona vs o que precisa ser corrigido.', s1: 7, s2: 8, status: 'A iniciar', resp: '', inControle: true },
+  { item: '4.2',  fase: 3, tarefa: 'Análise de mercado e concorrência', objetivo: 'Posicionar o TN Manager no cenário competitivo.', s1: 8, s2: 8, status: 'A iniciar', resp: '', inControle: true },
+  { item: '4.3',  fase: 3, tarefa: 'Apresentação do Diagnóstico', objetivo: 'Validar os pontos e definir os rumos do projeto.', s1: 8, s2: 8, status: 'A iniciar', resp: '', inControle: true },
+  { item: '5.1',  fase: 4, tarefa: 'Construção do Roadmap (2 anos)', objetivo: 'Definir uma trajetória clara de evolução do TN Manager, priorizando iniciativas de maior impacto em valor para o cliente e retorno para o negócio.', s1: 9, s2: 10, status: 'A iniciar', resp: '', inControle: true },
+  { item: '5.2',  fase: 4, tarefa: 'Estruturação do GTM', objetivo: 'Estruturar a estratégia de entrada e expansão no mercado: público-alvo, proposta de valor, canais e abordagem comercial.', s1: 10, s2: 11, status: 'A iniciar', resp: '', inControle: true },
+  { item: '5.3',  fase: 4, tarefa: 'Estratégia de Monetização', objetivo: 'Definir como o TN Manager captura valor: precificação, oferta e recorrência.', s1: 12, s2: 12, status: 'A iniciar', resp: '', inControle: true },
+  { item: '6.0',  fase: 5, tarefa: 'Apresentação da BP e GTM', objetivo: 'Validar os entregáveis e a possibilidade de renegociação para acompanhamento da execução.', s1: 12, s2: 12, status: 'A iniciar', resp: '', inControle: true },
+];
+
+TASKS.forEach(t => PHASES[t.fase].tasks.push(t));
+
+const FINDINGS = [
+  { color: 'var(--status-crit)', label: 'Divergência entre abas', title: '"Assinatura do NDA e contrato" só existe no Gantt', text: 'A semana 1 do Macro Cronograma abre com essa atividade, mas ela não tem linha correspondente na aba Cronograma-PA: sem objetivo formal, sem responsável, sem status. Hoje ninguém está sendo cobrado por ela dentro do controle.', ref: 'Macro Cronograma, S1 &middot; ausente em Cronograma-PA' },
+  { color: 'var(--status-crit)', label: 'Divergência entre abas', title: '"Entrevista com os stakeholders" não tem semana', text: 'O item 2.1.1 está descrito na aba de controle com objetivo claro, mas nenhuma semana do Gantt macro está marcada para ele. Sem uma semana definida, essa entrevista corre o risco de ser esquecida quando a execução começar.', ref: 'Cronograma-PA, item 2.1.1 &middot; ausente em Macro Cronograma' },
+  { color: 'var(--status-warn)', label: 'Governança', title: 'Nenhuma tarefa tem responsável', text: 'As colunas Responsável e Facilitador-TN estão vazias nas 12 linhas da aba de controle. Sem um nome ligado a cada tarefa, a coluna Status não tem quem atualizar e a coluna Farol não tem quem acionar.', ref: 'Cronograma-PA, colunas F e G, 12 de 12 linhas' },
+  { color: 'var(--status-warn)', label: 'Datas', title: 'Início e Término Previsto ainda em branco', text: 'O Gantt macro já define em qual semana cada atividade acontece, mas as colunas Início Previsto e Término Previsto da aba de controle estão vazias. Sem data de calendário, a coluna Variação não tem como calcular atraso ou adiantamento.', ref: 'Cronograma-PA, colunas H e J, 12 de 12 linhas' },
+  { color: 'var(--status-warn)', label: 'Capacidade', title: 'Semanas 8 e 12 concentram duas entregas cada', text: 'Na semana 8, Análise de mercado e Apresentação do Diagnóstico caem juntas. Na semana 12, Estratégia de Monetização e Apresentação da BP e GTM também. São exatamente as semanas de fechamento de fase, o ponto mais provável de atraso em cascata.', ref: 'Macro Cronograma, S8 e S12' },
+  { color: 'var(--status-info)', label: 'Indicador', title: 'A coluna Farol ainda não está ligada a uma cor', text: 'Todas as 12 linhas mostram a letra "F" sem preenchimento condicional. Do jeito que está, essa coluna não comunica status; precisa de uma regra (por exemplo, ligada a Variação ou a Status) antes de virar um farol de verdade.', ref: 'Cronograma-PA, coluna N, 12 de 12 linhas' },
+];
+
+const RECOMMENDATIONS = [
+  { title: 'Atribuir Responsável e Facilitador-TN por tarefa', text: 'Antes do kickoff, preencher essas duas colunas nas 12 linhas. Sem um nome por tarefa, o cronograma não tem quem o execute nem quem o atualize.' },
+  { title: 'Incluir a assinatura do NDA/contrato na aba de controle', text: 'Criar uma linha para essa atividade em Cronograma-PA, com objetivo, responsável e as mesmas colunas de data das demais tarefas.' },
+  { title: 'Dar uma semana à entrevista com stakeholders', text: 'Marcar no Macro Cronograma em qual semana a "Entrevista com os stakeholders" (2.1.1) acontece, para que ela não fique fora do calendário visual.' },
+  { title: 'Converter as semanas em datas de calendário', text: 'Assim que a data de início for confirmada, transformar S1 a S12 em datas reais e preencher Início/Término Previsto, destravando o cálculo da coluna Variação.' },
+  { title: 'Redistribuir as entregas das semanas 8 e 12', text: 'Avaliar se Análise de mercado e Apresentação do Diagnóstico (S8), e Estratégia de Monetização e Apresentação da BP e GTM (S12), podem ser espaçadas em uma semana a mais cada, reduzindo o risco de atraso em cascata.' },
+  { title: 'Ativar a formatação condicional da coluna Farol', text: 'Ligar o Farol a uma regra de cor (por exemplo, por Variação ou por Status) para que, quando a execução começar, ele funcione como indicador visual e não como texto fixo.' },
+];
+
+const SECTIONS = [
+  { id: 'doc', label: '01 &middot; Estrutura do arquivo', name: 'Estrutura do arquivo' },
+  { id: 'fases', label: '02 &middot; Fases', name: 'Fases' },
+  { id: 'gantt', label: '03 &middot; Linha do tempo', name: 'Linha do tempo' },
+  { id: 'tarefas', label: '04 &middot; Detalhe', name: 'Detalhe das tarefas' },
+  { id: 'alertas', label: '05 &middot; Pontos de atenção', name: 'Pontos de atenção' },
+  { id: 'recomendacoes', label: '06 &middot; Antes de executar', name: 'Recomendações' },
+];
+
+const TRACK_SECTIONS = [
+  { id: 'topo', label: 'Guia de leitura' },
+  ...SECTIONS,
+];
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============ RENDER ============ */
+
+function renderPhases(){
+  const track = document.getElementById('phaseTrack');
+  track.innerHTML = PHASES.map((p, i) => {
+    const weeks = p.tasks.filter(t => t.s1).map(t => [t.s1, t.s2]).flat();
+    const wLabel = weeks.length ? `S${Math.min(...weeks)}–S${Math.max(...weeks)}` : 'sem semana fixa';
+    return `<div class="phase" style="--phase-color:${p.color}">
+      <div class="node">${i === 0 ? '00' : String(i).padStart(2, '0')}</div>
+      <h4>${p.name}</h4>
+      <div class="count"><b>${p.tasks.length}</b> tarefa${p.tasks.length === 1 ? '' : 's'}</div>
+      <div class="weeks">${wLabel}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderTable(){
+  const body = document.getElementById('taskTableBody');
+  body.innerHTML = TASKS.map(t => {
+    const semana = t.s1 ? (t.s1 === t.s2 ? `S${t.s1}` : `S${t.s1}–S${t.s2}`) : '<span class="pill pill-gap">sem semana</span>';
+    const resp = t.resp ? t.resp : '<span class="pill pill-gap">não definido</span>';
+    const controleFlag = !t.inControle ? '<br><span class="pill pill-gap" style="margin-top:6px">fora do controle</span>' : '';
+    return `<tr>
+      <td class="item">${t.item}</td>
+      <td><span class="pill pill-phase" style="background:${PHASES[t.fase].color}26;color:${PHASES[t.fase].color}">${PHASES[t.fase].name}</span></td>
+      <td class="tarefa">${t.tarefa}${controleFlag}</td>
+      <td class="objetivo">${t.objetivo}</td>
+      <td class="semana">${semana}</td>
+      <td><span class="pill pill-status">${t.status}</span></td>
+      <td>${resp}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderFindings(){
+  const grid = document.getElementById('findingsGrid');
+  grid.innerHTML = FINDINGS.map(f => `
+    <div class="finding" style="--sev-color:${f.color}">
+      <div>
+        <span class="sev">${f.label}</span>
+        <span class="ref">${f.ref}</span>
+      </div>
+      <div>
+        <h4>${f.title}</h4>
+        <p>${f.text}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRecommendations(){
+  const list = document.getElementById('recoList');
+  list.innerHTML = RECOMMENDATIONS.map((r, i) => `
+    <div class="reco">
+      <div class="n">${i + 1}</div>
+      <div class="body">
+        <h5>${r.title}</h5>
+        <p>${r.text}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderRailnav(){
+  const nav = document.getElementById('railnav');
+  nav.innerHTML = SECTIONS.map(s => `<a href="#${s.id}" data-id="${s.id}" aria-label="Ir para ${s.name}"><span class="tip">${s.name}</span></a>`).join('');
+}
+
+let ganttChart;
+function renderGantt(){
+  const ctx = document.getElementById('ganttChart');
+  const ordered = [...TASKS].sort((a, b) => (a.s1 || 99) - (b.s1 || 99));
+  const withWeeks = ordered.filter(t => t.s1);
+  const labels = withWeeks.map(t => (t.item !== '-' ? t.item + ' · ' : '') + t.tarefa);
+  const data = withWeeks.map(t => [t.s1 - 1, t.s2]);
+  const colors = withWeeks.map(t => PHASES[t.fase].color);
+
+  const gridColor = 'rgba(232,244,236,.07)';
+  const tickColor = '#6E8A79';
+  const labelColor = '#DCE8E1';
+
+  if (ganttChart) ganttChart.destroy();
+  ganttChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data,
+        backgroundColor: colors,
+        borderRadius: 5,
+        barPercentage: 0.6,
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      maintainAspectRatio: false,
+      layout: { padding: { right: 8 } },
+      animation: { duration: prefersReducedMotion ? 0 : 900, easing: 'easeOutCubic' },
+      scales: {
+        x: {
+          min: 0, max: 12,
+          ticks: { stepSize: 1, color: tickColor, callback: v => 'S' + v, font: { size: 11, family: "'IBM Plex Mono', monospace" } },
+          grid: { color: gridColor },
+          border: { color: gridColor },
+        },
+        y: {
+          reverse: false,
+          ticks: { color: labelColor, font: { size: 12, family: "'Manrope', sans-serif" } },
+          grid: { display: false },
+          border: { color: gridColor },
+        }
+      },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0D1712',
+          borderColor: 'rgba(232,244,236,.15)',
+          borderWidth: 1,
+          padding: 10,
+          titleFont: { family: "'Manrope', sans-serif", weight: '700' },
+          bodyFont: { family: "'IBM Plex Mono', monospace" },
+          callbacks: {
+            title: items => labels[items[0].dataIndex],
+            label: item => {
+              const [s, e] = data[item.dataIndex];
+              return (s + 1 === e) ? `Semana ${e}` : `Semana ${s + 1} a ${e}`;
+            }
+          }
+        }
+      }
+    }
+  });
+}
+
+function renderLegend(){
+  const el = document.getElementById('ganttLegend');
+  el.innerHTML = PHASES.map(p => `<div class="item"><span class="sw" style="background:${p.color}"></span>${p.name}</div>`).join('');
+}
+
+function runCountUps(){
+  document.querySelectorAll('.stat .cnt[data-count]').forEach(el => {
+    const target = Number(el.getAttribute('data-count'));
+    if (prefersReducedMotion || typeof countUp === 'undefined' || !window.countUp.CountUp) { el.textContent = target; return; }
+    const cu = new countUp.CountUp(el, target, { duration: 1.3, useEasing: true });
+    if (!cu.error) cu.start(); else el.textContent = target;
+  });
+}
+
+function initProgress(){
+  const fill = document.getElementById('progressFill');
+  function update(){
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+    fill.style.width = pct + '%';
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+function initSectionTracking(){
+  const running = document.getElementById('runningLabel');
+  const dots = document.querySelectorAll('#railnav a');
+  const map = new Map(TRACK_SECTIONS.map(s => [s.id, s]));
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        const s = map.get(id);
+        if (!s) return;
+        running.innerHTML = s.label;
+        dots.forEach(d => d.toggleAttribute('data-active', d.dataset.id === id));
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+  TRACK_SECTIONS.forEach(s => {
+    const el = document.getElementById(s.id);
+    if (el) observer.observe(el);
+  });
+}
+
+let lenisInstance = null;
+
+function initLenis(){
+  if (prefersReducedMotion || typeof Lenis === 'undefined') return null;
+  const lenis = new Lenis({ duration: 1.05, smoothWheel: true, wheelMultiplier: 1 });
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  if (typeof ScrollTrigger !== 'undefined') {
+    lenis.on('scroll', ScrollTrigger.update);
+  }
+  lenisInstance = lenis;
+  return lenis;
+}
+
+function initAnchorScroll(){
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href').slice(1);
+      const target = id ? document.getElementById(id) : document.body;
+      if (!target) return;
+      e.preventDefault();
+      if (lenisInstance) {
+        lenisInstance.scrollTo(target, { offset: -70, duration: 1.1 });
+      } else {
+        const top = target.getBoundingClientRect().top + window.scrollY - 70;
+        window.scrollTo({ top, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+      }
+      history.pushState(null, '', '#' + id);
+    });
+  });
+}
+
+function initHeroAnimation(){
+  if (prefersReducedMotion || typeof gsap === 'undefined') return;
+  document.documentElement.classList.add('js-anim');
+  let chars = null;
+  if (typeof SplitType !== 'undefined') {
+    const split = new SplitType('#heroTitle', { types: 'chars', tagName: 'span' });
+    chars = split.chars;
+    chars.forEach(c => c.classList.add('split-char'));
+  }
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  if (chars && chars.length) {
+    tl.from(chars, { opacity: 0, y: 22, duration: 0.7, stagger: 0.014 });
+  } else {
+    tl.from('#heroTitle', { opacity: 0, y: 22, duration: 0.7 });
+  }
+  tl.from('.eyebrow', { opacity: 0, y: 8, duration: 0.5 }, 0)
+    .from('.hero .lead', { opacity: 0, y: 14, duration: 0.6 }, '-=0.4')
+    .from('.hero .source', { opacity: 0, y: 10, duration: 0.5 }, '-=0.35')
+    .from('.stat-strip .stat', { opacity: 0, y: 14, duration: 0.5, stagger: 0.06 }, '-=0.3');
+}
+
+function initReveal(){
+  const items = document.querySelectorAll('.reveal');
+  if (prefersReducedMotion || typeof gsap === 'undefined') {
+    items.forEach(el => { el.style.opacity = 1; el.style.transform = 'none'; });
+    return;
+  }
+  document.documentElement.classList.add('js-anim');
+  gsap.registerPlugin(ScrollTrigger);
+  items.forEach(el => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%' }
+    });
+  });
+  const staggerGroups = ['#phaseTrack .phase', '#findingsGrid .finding', '#recoList .reco'];
+  staggerGroups.forEach(sel => {
+    const nodes = document.querySelectorAll(sel);
+    if (!nodes.length) return;
+    gsap.set(nodes, { opacity: 0, y: 14 });
+    gsap.to(nodes, {
+      opacity: 1, y: 0, duration: 0.55, ease: 'power2.out', stagger: 0.07,
+      scrollTrigger: { trigger: nodes[0].closest('section'), start: 'top 82%' }
+    });
+  });
+}
+
+function initGanttLazyLoad(){
+  const section = document.getElementById('gantt');
+  if (!('IntersectionObserver' in window)) { renderGantt(); return; }
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        renderGantt();
+        obs.disconnect();
+      }
+    });
+  }, { threshold: 0.15 });
+  obs.observe(section);
+}
+
+renderPhases();
+renderTable();
+renderFindings();
+renderRecommendations();
+renderRailnav();
+renderLegend();
+initProgress();
+initSectionTracking();
+initLenis();
+initAnchorScroll();
+initHeroAnimation();
+initReveal();
+initGanttLazyLoad();
+runCountUps();
+window.addEventListener('resize', () => { if (ganttChart) ganttChart.resize(); });
+</script>
+</body>
+</html>

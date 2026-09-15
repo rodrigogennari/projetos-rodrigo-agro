@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Silveira Consultoria — BI Comercial</title>
+<title>Projetos Rodrigo Agro - BI Comercial</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
@@ -782,8 +782,8 @@ tbody tr:last-child td { border-bottom: none; }
 <!-- ─── Sidebar ─── -->
 <aside id="sidebar">
   <div class="sidebar-logo">
-    <div class="brand">Silveira</div>
-    <div class="sub">Consultoria · BI Comercial</div>
+    <div class="brand">Rodrigo Agro</div>
+    <div class="sub">Projetos · BI Comercial</div>
   </div>
 
   <nav>
@@ -1124,7 +1124,7 @@ tbody tr:last-child td { border-bottom: none; }
         <h3>⚙️ Empresa</h3>
         <div class="config-row">
           <div><div class="config-label">Nome da empresa</div></div>
-          <input class="config-input" id="cfg-empresa" value="Silveira Consultoria" />
+          <input class="config-input" id="cfg-empresa" value="Projetos Rodrigo Agro" />
         </div>
         <div class="config-row">
           <div><div class="config-label">Meta anual padrão (R$)</div></div>
@@ -1232,7 +1232,7 @@ tbody tr:last-child td { border-bottom: none; }
           <strong>Como criar o token:</strong><br>
           1. Acesse <strong>github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong><br>
           2. Clique em <strong>Generate new token</strong><br>
-          3. Em <strong>Repository access</strong>, selecione apenas <strong>silveira-bi</strong><br>
+          3. Em <strong>Repository access</strong>, selecione apenas <strong>projetos-rodrigo-agro</strong><br>
           4. Em <strong>Permissions → Contents</strong>, selecione <strong>Read and Write</strong><br>
           5. Gere e cole o token acima
         </div>
@@ -1314,7 +1314,7 @@ let vendas = { page: 1, perPage: 15, sort: null, asc: true };
 /* ════════════════════════════════════════════
    GITHUB SYNC
 ════════════════════════════════════════════ */
-const GH_REPO  = 'rodrigogennari/silveira-bi';
+const GH_REPO  = 'rodrigogennari/projetos-rodrigo-agro';
 const GH_FILE  = 'data.json';
 
 function ghToken() { return localStorage.getItem('gh_token') || ''; }
@@ -1616,7 +1616,7 @@ function processData(json) {
     return {
       _date:     dt,
       data:      dt.toLocaleDateString('pt-BR'),
-      consultor: String(rowGet(row, getColName('consultor')) || 'Silveira').trim(),
+      consultor: String(rowGet(row, getColName('consultor')) || 'Projetos Rodrigo Agro').trim(),
       cliente:   String(rowGet(row, getColName('cliente'))   || 'Sem cliente').trim(),
       fazenda,
       segmento:  String(rowGet(row, getColName('segmento'))  || 'Outros').trim(),
@@ -2399,7 +2399,7 @@ function exportCSV() {
   const blob    = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8;' });
   const url     = URL.createObjectURL(blob);
   const a       = document.createElement('a');
-  a.href = url; a.download = `silveira-bi-${new Date().toISOString().slice(0,10)}.csv`;
+  a.href = url; a.download = `projetos-rodrigo-agro-${new Date().toISOString().slice(0,10)}.csv`;
   a.click(); URL.revokeObjectURL(url);
   showToast('✅ CSV exportado!', 'success');
 }
