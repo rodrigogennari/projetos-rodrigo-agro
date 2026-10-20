@@ -82,31 +82,26 @@ async function wave(alpha) {
 
   // 1 Agenda
   {
-    const s = content("Agenda", "O que vamos apresentar e decidir hoje");
+    const s = content("Agenda", "40 minutos: 30 de apresentação e 10 para decisões");
     const items = [
-      ["Resumo executivo e aderência estratégica", "A recomendação em uma página"],
-      ["Cliente-alvo e o que muda da v1.0", "Confinamentos de 200 a 2.000 cabeças"],
-      ["Mercado: estamos no caminho certo?", "Censo de Confinamento 2025"],
-      ["Proposta de valor e objetivos", "Quem ganha o quê com o TN Manager Web"],
-      ["Nosso diferencial: a entrega técnica", "O que fazemos com os dados do cliente"],
-      ["Produto mínimo e como funciona na prática", "Rotina, escore de cocho, internet e arquitetura"],
-      ["Pesquisa com 30 fazendas", "Plano e composição da amostra"],
-      ["Concorrência", "Cargill, DSM e Tecnobeef"],
-      ["Custo-benefício e cobrança", "20 licenças pagas hoje e o que muda"],
-      ["SWOT e go-to-market", "Da v1.0 para a Web; 20 fazendas e analistas"],
-      ["Roadmap de 12 meses e cronograma de 4 anos", "Datas, responsáveis e critérios de avanço"],
-      ["Riscos, decisões e próximos passos", "O que precisamos aprovar hoje"],
+      ["Resumo executivo e cliente-alvo", "Confinamentos de 200 a 2.000 cabeças", "4 min"],
+      ["Mercado: estamos no caminho certo?", "Bússola Farm 2025 e mapa dos confinadores", "5 min"],
+      ["Nosso diferencial e como funciona na prática", "Entrega técnica, rotina, escore de cocho e arquitetura", "7 min"],
+      ["Concorrência e custo-benefício", "Cargill, DSM, Tecnobeef e as 20 licenças pagas hoje", "5 min"],
+      ["SWOT e go-to-market", "Rodrigo com 20 fazendas, depois analistas dedicados", "4 min"],
+      ["Roadmap e cronograma de 4 anos", "15 meses detalhados e visão até 2030", "5 min"],
+      ["Decisões e próximos passos", "O que precisamos aprovar hoje", "10 min"],
     ];
     items.forEach((it, i) => {
-      const col = Math.floor(i / 6), row = i % 6;
-      const x = 0.55 + col * 4.6, y = 1.3 + row * 0.56;
-      OV(s, { x, y, w: 0.4, h: 0.4, fill: { color: i === 4 ? C.navy : C.magenta } });
-      T(s, String(i + 1), { x, y, w: 0.4, h: 0.4, fontSize: 13, bold: true, color: C.white, align: "center", valign: "middle" });
-      T(s, it[0], { x: x + 0.52, y: y - 0.03, w: 3.9, h: 0.25, fontSize: 12, bold: true, color: C.navy });
-      T(s, it[1], { x: x + 0.52, y: y + 0.21, w: 3.9, h: 0.2, fontSize: 9.5, color: C.text });
+      const x = 0.6, y = 1.28 + i * 0.49;
+      OV(s, { x, y, w: 0.38, h: 0.38, fill: { color: i === 2 ? C.navy : C.magenta } });
+      T(s, String(i + 1), { x, y, w: 0.38, h: 0.38, fontSize: 13, bold: true, color: C.white, align: "center", valign: "middle" });
+      T(s, it[0], { x: x + 0.55, y: y - 0.03, w: 5.6, h: 0.25, fontSize: 13, bold: true, color: C.navy });
+      T(s, it[1], { x: x + 0.55, y: y + 0.21, w: 5.6, h: 0.2, fontSize: 9.5, color: C.text });
+      T(s, it[2], { x: 7.3, y, w: 0.9, h: 0.38, fontSize: 10.5, bold: true, color: C.muted, align: "right", valign: "middle" });
+      if (i < 6) LN(s, x + 0.55, y + 0.45, 8.2, y + 0.45, "ECEFF2", 0.5);
     });
-    LN(s, 5.0, 1.3, 5.0, 4.5, C.line, 0.75);
-    s.addNotes("Roteiro sugerido para a diretoria: itens 1 a 4 em 8 minutos; itens 5 e 6 são o coração da conversa (o diferencial é a entrega técnica e como funciona na prática); itens 7 a 11 em 12 minutos; reservar 10 minutos para o item 12.");
+    s.addNotes("O item 3 é o coração da conversa: o diferencial é a entrega técnica, e a ferramenta é o meio. O material de apoio para perguntas está no anexo, depois do slide de agradecimento.");
   }
 
   // 2 Diferencial
@@ -298,7 +293,7 @@ async function wave(alpha) {
     const q = [
       ["F", "Forças", C.navy, 0.5, 1.2, [["Ganho de tempo: relatório pronto toda semana, sem planilha", 1], ["Benchmarking entre fazendas da carteira TN", 1], ["Dados próprios, sem depender de fornecedor", 1], ["Sem custo de licença para o cliente", 1], ["Marca forte, produtos premium e equipe técnica", 0]]],
       ["F", "Fraquezas", C.muted, 5.05, 1.2, [["Depende da disciplina de lançamento manual", 1], ["Time de análise pequeno no início (só Rodrigo)", 1], ["Ainda sem casos de sucesso próprios", 0], ["Modelo de cobrança ainda a definir", 0]]],
-      ["O", "Oportunidades", C.tealDark, 0.5, 3.0, [["1.131 confinamentos com menos de 1.000 cabeças, pouco atendidos", 1], ["Cortar até R$ 364 mil por ano em licenças", 1], ["Recuperar ex-clientes e abrir não clientes", 0], ["Recomendação nutricional baseada em dados", 0], ["Clube de membros e programa de sustentabilidade", 0]]],
+      ["O", "Oportunidades", C.tealDark, 0.5, 3.0, [["11.194 confinamentos de até 1.500 cabeças (Bússola Farm), pouco atendidos", 1], ["Cortar até R$ 364 mil por ano em licenças", 1], ["Recuperar ex-clientes e abrir não clientes", 0], ["Recomendação nutricional baseada em dados", 0], ["Clube de membros e programa de sustentabilidade", 0]]],
       ["A", "Ameaças", C.magenta, 5.05, 3.0, [["Cargill e DSM já vendem ferramenta junto da nutrição", 1], ["Baixa adesão ao lançamento manual", 1], ["Dependência da software house", 0], ["Não conseguir embutir o custo no preço do produto", 0]]],
     ];
     q.forEach((c) => {
@@ -497,22 +492,22 @@ async function wave(alpha) {
 
   // Slide 2: veredito
   {
-    const s = content("Estamos no caminho certo?", "Sim, com uma ressalva: o público é o maior em número de fazendas, mas pequeno em volume de cabeças.", FONTES);
+    const s = content("Estamos no caminho certo?", "Sim, com uma ressalva: o público é o maior em número de fazendas, mas menor em volume de cabeças.", FONTES);
     const cols = [
       { t: "O que os dados confirmam", col: C.navy, items: [
-        "Confinamentos com menos de 1.000 cabeças são o maior grupo: 1.131 propriedades, cerca de 46% do total",
+        "Os pequenos são a maioria: 11.194 confinamentos de até 1.500 cabeças, 85% dos classificados (Bússola Farm 2025)",
         "Os grandes já estão concentrados e disputados: os 100 maiores têm 45% das cabeças",
         "A adoção digital cresce com escala e consultoria (Embrapa): o pequeno fica sem ferramenta, e o técnico TN é o elo",
         "A Embrapa indica que o vagão forrageiro se justifica a partir de cerca de 200 cabeças: coerente com o nosso piso",
       ] },
       { t: "O que pede cuidado", col: C.magenta, items: [
-        "Em volume, o pequeno pesa pouco: estimamos menos de 10% das cabeças confinadas",
+        "Em volume, o pequeno pesa menos: 23% da capacidade estática projetada (Bússola Farm 2025)",
         "Abaixo de 10 mil cabeças o volume ficou estável em 2024 (3,3 mi), enquanto os grandes cresceram",
         "O valor vem do número de fazendas e da fidelização, não do Sales Profit por cliente",
       ] },
       { t: "O que ainda não sabemos", col: C.tealDark, items: [
         "Percentual nacional de confinamentos com automação: não há dado público",
-        "Número total de confinamentos do país: o censo mapeia 2.445; o IBGE (Censo Agro 2017) é a única contagem universal",
+        "As fontes divergem no total: 2.445 no censo dsm-firmenich e 14.014 no Bússola Farm. Entender a diferença de método",
         "Recorte de 1.000 a 2.000 cabeças e distribuição por bioma",
         "A pesquisa com 30 fazendas preenche essas lacunas",
       ] },
@@ -526,7 +521,76 @@ async function wave(alpha) {
     });
     R(s, { x: 0.5, y: 4.1, w: 9.0, h: 0.58, fill: { color: C.navy } });
     T(s, [{ text: "Conclusão: ", options: { bold: true, color: C.lime } }, { text: "o público de 200 a 2.000 cabeças é o maior em número de fazendas e o menos atendido. O caso se sustenta com custo baixo por cliente e escala de fazendas." }], { x: 0.68, y: 4.1, w: 8.7, h: 0.58, fontSize: 11, color: C.white, valign: "middle" });
-    s.addNotes("Estimativa de 'menos de 10% das cabeças': 1.131 propriedades com média hipotética de 500 cabeças dão cerca de 0,57 milhão, ou 6% de 9,25 milhões. É uma conta nossa, não dado do censo. Dados de 2024 (dsm-firmenich): confinamentos acima de 10 mil cabeças passaram de 53,9% para 58,7% das cabeças; abaixo de 10 mil ficaram em 3,3 milhões. Embrapa Pecuária Sudeste: estudos com 184 confinamentos (2023) e 130 confinamentos (2024) mostram que escala, escolaridade e consultoria aumentam a adoção de tecnologia digital; adotantes de software têm eficiência técnica maior (114 confinamentos). A indicação do vagão a partir de cerca de 200 cabeças vem de publicação técnica antiga da Embrapa sobre confinamento de bovinos.");
+    s.addNotes("Bússola Farm 2025: faixa 1 (até 1.500 cabeças) com 11.194 confinamentos e 3,5 milhões de cabeças de capacidade estática projetada, de 15 milhões nas três faixas. Estimativa anterior, pelo censo dsm-firmenich, de 'menos de 10% das cabeças': 1.131 propriedades com média hipotética de 500 cabeças dão cerca de 0,57 milhão, ou 6% de 9,25 milhões. É uma conta nossa, não dado do censo. Dados de 2024 (dsm-firmenich): confinamentos acima de 10 mil cabeças passaram de 53,9% para 58,7% das cabeças; abaixo de 10 mil ficaram em 3,3 milhões. Embrapa Pecuária Sudeste: estudos com 184 confinamentos (2023) e 130 confinamentos (2024) mostram que escala, escolaridade e consultoria aumentam a adoção de tecnologia digital; adotantes de software têm eficiência técnica maior (114 confinamentos). A indicação do vagão a partir de cerca de 200 cabeças vem de publicação técnica antiga da Embrapa sobre confinamento de bovinos.");
+  }
+
+  // 14 Bússola Farm
+  {
+    const s = content("Bússola Farm 2025: 14.014 confinamentos no Brasil", "85% são pequenos. Juntos, têm só 23% da capacidade estática: muitas fazendas, pouco volume cada.", "Fonte: Bússola Farm 2025. Percentuais sobre os 13.214 confinamentos com faixa informada e 15 milhões de cabeças de capacidade estática projetada.");
+    const hdr = [["Faixa", 0.5], ["Confinamentos", 3.0], ["Capacidade estática", 4.45], ["% dos confinamentos e % da capacidade", 6.0]];
+    hdr.forEach((h) => T(s, h[0], { x: h[1], y: 1.2, w: 3.4, h: 0.22, fontSize: 9, bold: true, color: C.muted }));
+    const fx = [
+      ["Faixa 1: pequenos", "até 1.500 cabeças; unidades até 2,4 ha", "11.194", "3,5 mi", 84.7, 23, C.magenta],
+      ["Faixa 2: médios", "até 6.900 cabeças; unidades até 9 ha", "1.664", "5,5 mi", 12.6, 37, C.tealDark],
+      ["Faixa 3: grandes", "mais de 7.000 cabeças (média de 16 mil); acima de 10 ha", "356", "6,0 mi", 2.7, 40, C.navy],
+    ];
+    fx.forEach((f, i) => {
+      const y = 1.47 + i * 0.92;
+      R(s, { x: 0.5, y, w: 9.0, h: 0.82, fill: { color: i === 0 ? C.magLight : C.bg } });
+      R(s, { x: 0.5, y, w: 0.07, h: 0.82, fill: { color: f[6] } });
+      T(s, f[0], { x: 0.68, y: y + 0.12, w: 2.3, h: 0.28, fontSize: 12.5, bold: true, color: f[6] });
+      T(s, f[1], { x: 0.68, y: y + 0.4, w: 2.25, h: 0.38, fontSize: 8.5 });
+      T(s, f[2], { x: 3.0, y: y + 0.12, w: 1.4, h: 0.4, fontSize: 22, bold: true, color: f[6] });
+      T(s, "confinamentos", { x: 3.0, y: y + 0.52, w: 1.4, h: 0.2, fontSize: 8.5, color: C.muted });
+      T(s, f[3], { x: 4.45, y: y + 0.12, w: 1.4, h: 0.4, fontSize: 22, bold: true, color: C.navy });
+      T(s, "de cabeças", { x: 4.45, y: y + 0.52, w: 1.4, h: 0.2, fontSize: 8.5, color: C.muted });
+      const bw = 2.6;
+      [[f[4], f[6], "dos confinamentos"], [f[5], "9AA3AC", "da capacidade"]].forEach((b, k) => {
+        const by = y + 0.17 + k * 0.28, w = Math.max(0.04, bw * b[0] / 100);
+        R(s, { x: 6.0, y: by, w, h: 0.2, fill: { color: b[1] } });
+        const inside = w > 1.8;
+        T(s, Math.round(b[0]) + "% " + b[2], { x: inside ? 6.08 : 6.0 + w + 0.06, y: by - 0.02, w: 1.7, h: 0.24, fontSize: 8.5, bold: k === 0, color: inside ? C.white : C.text, valign: "middle" });
+      });
+    });
+    RR(s, { x: 0.5, y: 4.28, w: 4.3, h: 0.32, fill: { color: C.lime }, rectRadius: 0.16 });
+    T(s, "Público do TN Manager Web: Faixa 1 e início da Faixa 2", { x: 0.5, y: 4.28, w: 4.3, h: 0.32, fontSize: 10, bold: true, color: C.navy, align: "center", valign: "middle" });
+    s.addNotes("Dados do Bússola Farm 2025: 14.014 confinamentos no total. Faixa 1 (pequenos, até 1.500 cabeças): 11.194 confinamentos, 3,5 milhões de cabeças de capacidade estática projetada, unidades até 2,4 hectares. Faixa 2 (médios, até 6.900 cabeças): 1.664, 5,5 milhões, até 9 hectares. Faixa 3 (grandes, mais de 7.000 cabeças, média de 16.000): 356, 6 milhões, acima de 10 hectares. Atenção: as três faixas somam 13.214, não 14.014; os 800 restantes não aparecem com faixa e precisam ser confirmados na fonte. Percentuais calculados sobre 13.214 confinamentos e 15 milhões de cabeças. O Bússola conta muito mais confinamentos que o censo dsm-firmenich (2.445): os métodos são diferentes, e vale explicar se perguntarem. Mensagem: a faixa do TN Manager Web (200 a 2.000 cabeças) cobre a Faixa 1 e o começo da Faixa 2, o maior grupo em número de fazendas.");
+  }
+
+  // 15 Mapa
+  {
+    const s = content("Onde estão os confinadores: 2.796 em 24 estados", "Rondônia, São Paulo e Mato Grosso somam 65% da base.", "Fonte: base de confinadores, out/2025 a jan/2026. Mapa: @svg-maps/brazil (CC BY 4.0).");
+    s.addImage({ path: __dirname + "/mapa-brasil.png", x: 0.55, y: 1.12, w: 3.55, h: 3.7 });
+    R(s, { x: 4.45, y: 1.22, w: 2.2, h: 1.05, fill: { color: C.navy } });
+    T(s, "2.796", { x: 4.6, y: 1.3, w: 2.0, h: 0.5, fontSize: 30, bold: true, color: C.white });
+    T(s, "confinadores mapeados", { x: 4.6, y: 1.84, w: 2.0, h: 0.3, fontSize: 10, color: C.white });
+    T(s, "Confinadores por estado", { x: 4.45, y: 2.42, w: 2.2, h: 0.22, fontSize: 9.5, bold: true, color: C.navy });
+    [["1B3A8C", "mais de 300"], ["4A79BF", "101 a 300"], ["9DBBDF", "21 a 100"], ["DCE7F3", "1 a 20"], ["EEF0F3", "sem dado"]].forEach((l, i) => {
+      R(s, { x: 4.45, y: 2.7 + i * 0.25, w: 0.3, h: 0.17, fill: { color: l[0] } });
+      T(s, l[1], { x: 4.83, y: 2.67 + i * 0.25, w: 1.6, h: 0.22, fontSize: 9, valign: "middle" });
+    });
+    T(s, "Maiores estados", { x: 6.95, y: 1.22, w: 2.5, h: 0.22, fontSize: 9.5, bold: true, color: C.navy });
+    const top = [["RO", 1022], ["SP", 461], ["MT", 341], ["MG", 200], ["MS", 161], ["BA", 117], ["Outros 18", 495]];
+    top.forEach((t, i) => {
+      const y = 1.5 + i * 0.33, w = 1.6 * t[1] / 1022;
+      T(s, t[0], { x: 6.95, y, w: 0.75, h: 0.24, fontSize: 9.5, bold: true, color: C.text, valign: "middle" });
+      R(s, { x: 7.7, y: y + 0.03, w, h: 0.18, fill: { color: i === 6 ? C.teal : i < 3 ? C.navy : "4A79BF" } });
+      T(s, t[1].toLocaleString("pt-BR"), { x: 7.75 + w, y, w: 0.6, h: 0.24, fontSize: 9, bold: true, color: C.text, valign: "middle" });
+    });
+    R(s, { x: 4.45, y: 4.05, w: 5.05, h: 0.62, fill: { color: C.magLight } });
+    R(s, { x: 4.45, y: 4.05, w: 0.06, h: 0.62, fill: { color: C.magenta } });
+    T(s, [{ text: "Leitura: ", options: { bold: true, color: C.magenta } }, { text: "Rondônia tem 37% dos confinadores, mas não está entre os 5 estados com mais cabeças confinadas. São operações menores, o perfil do TN Manager Web." }], { x: 4.6, y: 4.05, w: 4.85, h: 0.62, fontSize: 9.5, color: C.text, valign: "middle" });
+    s.addNotes("Base informada: 2.796 confinadores, período de outubro de 2025 a janeiro de 2026 (confirmar o período exato). A soma dos estados dá 2.797, um a mais que o total: conferir. A sigla MD da planilha foi lida como MS (Mato Grosso do Sul). AP, CE e PB não aparecem na base. RO 1.022, SP 461, MT 341, MG 200, MS 161, BA 117, PR 94, GO 93, AC 78, PA 77, AM 34, TO 34, SC 18, ES 13, RN 11, RJ 8, RR 8, RS 8, SE 5, DF 4, AL 3, PE 3, PI 3, MA 1. RO, SP e MT somam 1.824, ou 65%. A leitura sobre Rondônia cruza com o censo dsm-firmenich 2025, em que MT, SP, GO, MS e MG somam 72% das cabeças e RO não aparece entre eles.");
+  }
+
+  // 16 Anexo
+  {
+    const s = pres.addSlide(); n++;
+    s.background = { color: C.navy };
+    R(s, { x: 0, y: 0, w: 0.12, h: 5.625, fill: { color: C.lime } });
+    T(s, "ANEXO", { x: 0.7, y: 1.9, w: 8, h: 0.3, fontSize: 12, bold: true, color: C.lime, charSpacing: 4 });
+    T(s, "Material de apoio", { x: 0.7, y: 2.2, w: 8, h: 0.7, fontSize: 34, bold: true, color: C.white });
+    T(s, "Para usar se a diretoria perguntar: v1.0 x v2.0, problema de negócio, mapa de valor, perfil do piloto, objetivos, produto mínimo, pesquisa com 30 fazendas, critérios de avanço, riscos e stakeholders.", { x: 0.7, y: 3.0, w: 7.6, h: 0.7, fontSize: 12, color: "D6DCEB" });
   }
 
   await pres.writeFile({ fileName: OUT });

@@ -32,7 +32,7 @@ for ss in src.slides:
             for el in list(ss.notes_slide.shapes._spTree.iterchildren())[2:]: t.append(copy.deepcopy(el))
     new.append(d)
 O=lambda i: orig[i-1]; N=lambda i: new[i-1]
-order=[O(1),O(2),N(1),O(3),O(4),O(5),O(6),N(12),N(13),O(7),O(8),O(9),O(10),O(11),O(12),N(2),O(13),N(3),N(4),O(15),O(16),N(5),O(18),O(19),N(6),N(7),N(8),N(9),O(25),N(10),O(27),O(28),N(11),O(30),O(31)]
+order=[O(1),N(1),O(3),O(4),N(14),N(15),N(13),N(2),N(3),N(4),N(5),N(6),N(7),N(8),N(9),N(10),N(11),O(31),N(16),N(12),O(5),O(6),O(7),O(9),O(10),O(12),O(13),O(15),O(16),O(25),O(28),O(30),O(2),O(8),O(11),O(18),O(19),O(27)]
 removed=[O(i) for i in (14,17,20,21,22,23,24,26,29)]
 lst=dst.slides._sldIdLst
 ids={s.slide_id:el for el in lst for s in [None] if False}
@@ -73,4 +73,5 @@ for i,s in enumerate(order,1):
     for sh in s.shapes:
         if sh.has_text_frame and re.fullmatch(r'\d{1,2}',sh.text_frame.text.strip()) and sh.left is not None and sh.left>8.5*H and sh.top>4.9*H:
             if sh.text_frame.paragraphs[0].runs: set_para(sh.text_frame.paragraphs[0],str(i))
+O(2)._element.set('show','0')
 dst.save(S+'/v2in/out.pptx'); print('ok',len(order))
