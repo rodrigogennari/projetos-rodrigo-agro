@@ -24,12 +24,8 @@ const NUDGE = { go: [-6, 8], mg: [8, 0], ba: [6, 0], pa: [0, 10], am: [0, 10], s
 const LABEL = ["rs", "rr", "ma", "pi", "ac", "am", "pa", "ro", "mt", "to", "ba", "go", "mg", "ms", "sp", "pr", "sc"];
 let svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${MAP.viewBox}" width="1226" height="1278">`;
 for (const l of MAP.locations) svg += `<path d="${l.path}" fill="#${cls(D[l.id])[0]}" stroke="#FFFFFF" stroke-width="1.2"/>`;
-for (const l of MAP.locations) {
-  if (!LABEL.includes(l.id)) continue;
-  const c = centroid(l.path), n = NUDGE[l.id] || [0, 0], col = cls(D[l.id])[1], big = D[l.id] >= 300;
-  const x = c.x + n[0], y = c.y + n[1];
-  svg += `<text x="${x}" y="${y - 2}" font-family="Carlito" font-size="${big ? 15 : 12}" font-weight="bold" fill="#${col}" text-anchor="middle">${l.id.toUpperCase()}</text>`;
-  svg += `<text x="${x}" y="${y + (big ? 15 : 12)}" font-family="Carlito" font-size="${big ? 15 : 11.5}" fill="#${col}" text-anchor="middle">${D[l.id].toLocaleString("pt-BR")}</text>`;
-}
+const CEN = {};
+for (const l of MAP.locations) { const c = centroid(l.path); CEN[l.id] = [+c.x.toFixed(1), +c.y.toFixed(1)]; }
+fs.writeFileSync(__dirname + "/mapa-centroides.json", JSON.stringify(CEN));
 svg += "</svg>";
 sharp(Buffer.from(svg)).png().toFile(__dirname + "/mapa-brasil.png").then(() => console.log("ok", Object.values(D).reduce((a, b) => a + b, 0)));

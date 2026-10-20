@@ -32,7 +32,7 @@ for ss in src.slides:
             for el in list(ss.notes_slide.shapes._spTree.iterchildren())[2:]: t.append(copy.deepcopy(el))
     new.append(d)
 O=lambda i: orig[i-1]; N=lambda i: new[i-1]
-order=[O(1),N(1),O(3),O(4),N(14),N(15),N(13),N(2),N(3),N(4),N(5),N(6),N(7),N(8),N(9),N(10),N(11),O(31),N(16),N(12),O(5),O(6),O(7),O(9),O(10),O(12),O(13),O(15),O(16),O(25),O(28),O(30),O(2),O(8),O(11),O(18),O(19),O(27)]
+order=[O(1),N(1),O(3),O(4),O(5),N(12),N(14),N(15),N(13),N(2),N(3),N(4),N(5),N(6),N(7),N(8),N(9),N(10),N(11),O(31),N(16),O(6),O(7),O(9),O(10),O(12),O(13),O(15),O(16),O(25),O(28),O(30),O(2),O(8),O(11),O(18),O(19),O(27)]
 removed=[O(i) for i in (14,17,20,21,22,23,24,26,29)]
 lst=dst.slides._sldIdLst
 ids={s.slide_id:el for el in lst for s in [None] if False}

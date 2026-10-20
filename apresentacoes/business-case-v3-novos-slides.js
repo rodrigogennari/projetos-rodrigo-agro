@@ -82,10 +82,10 @@ async function wave(alpha) {
 
   // 1 Agenda
   {
-    const s = content("Agenda", "40 minutos: 30 de apresentação e 10 para decisões");
+    const s = content("Agenda", "O que vamos apresentar e decidir hoje");
     const items = [
-      ["Resumo executivo e cliente-alvo", "Confinamentos de 200 a 2.000 cabeças", "4 min"],
-      ["Mercado: estamos no caminho certo?", "Bússola Farm 2025 e mapa dos confinadores", "5 min"],
+      ["Resumo executivo e cliente-alvo", "Confinamentos de 200 a 2.000 cabeças e o que muda da v1.0", "4 min"],
+      ["Mercado: estamos no caminho certo?", "Raio-X 2025, Bússola Farm e mapa dos confinadores", "5 min"],
       ["Nosso diferencial e como funciona na prática", "Entrega técnica, rotina, escore de cocho e arquitetura", "7 min"],
       ["Concorrência e custo-benefício", "Cargill, DSM, Tecnobeef e as 20 licenças pagas hoje", "5 min"],
       ["SWOT e go-to-market", "Rodrigo com 20 fazendas, depois analistas dedicados", "4 min"],
@@ -98,7 +98,6 @@ async function wave(alpha) {
       T(s, String(i + 1), { x, y, w: 0.38, h: 0.38, fontSize: 13, bold: true, color: C.white, align: "center", valign: "middle" });
       T(s, it[0], { x: x + 0.55, y: y - 0.03, w: 5.6, h: 0.25, fontSize: 13, bold: true, color: C.navy });
       T(s, it[1], { x: x + 0.55, y: y + 0.21, w: 5.6, h: 0.2, fontSize: 9.5, color: C.text });
-      T(s, it[2], { x: 7.3, y, w: 0.9, h: 0.38, fontSize: 10.5, bold: true, color: C.muted, align: "right", valign: "middle" });
       if (i < 6) LN(s, x + 0.55, y + 0.45, 8.2, y + 0.45, "ECEFF2", 0.5);
     });
     s.addNotes("O item 3 é o coração da conversa: o diferencial é a entrega técnica, e a ferramenta é o meio. O material de apoio para perguntas está no anexo, depois do slide de agradecimento.");
@@ -269,22 +268,24 @@ async function wave(alpha) {
     T(s, "A licença média por fazenda supera o resultado que muitos confinamentos pequenos geram para a TN. Por isso a licença de terceiros não escala para esse público.", { x: 0.5, y: 3.82, w: 4.57, h: 0.55, fontSize: 9, italic: true, color: C.navy });
     // direita
     head(s, "O que muda com o TN Manager Web", 5.4, 1.18, 4.1, C.navy, 0.34, 10.5);
-    R(s, { x: 5.4, y: 1.52, w: 4.1, h: 1.55, fill: { color: C.bg } });
+    R(s, { x: 5.4, y: 1.52, w: 4.1, h: 1.08, fill: { color: C.bg } });
     T(s, bullets([
-      "Migrar as 14 fazendas PecCode: economia de R$ 112 a 179 mil por ano",
-      "Migrar as 20 fazendas: até R$ 364 mil por ano (orçamento atual)",
-      "Ponto de equilíbrio: o projeto se paga quando o custo anual do TN Manager Web (desenvolvimento, nuvem e suporte) ficar abaixo da licença que substitui",
-      "Custo de desenvolvimento: orçamento da Dreamer após a imersão técnica (nov/2026)",
-    ]), { x: 5.5, y: 1.6, w: 3.92, h: 1.45, fontSize: 9 });
-    head(s, "Cobrança do cliente (proposta)", 5.4, 3.15, 4.1, C.magenta, 0.34, 10.5);
-    R(s, { x: 5.4, y: 3.49, w: 4.1, h: 1.22, fill: { color: C.magLight } });
+      "Tudo que for web passa a ser TN Manager Web",
+      "Cada fazenda que migra deixa de custar de R$ 8 mil a R$ 40 mil por ano em licença; todas juntas, até R$ 364 mil",
+      "O projeto se paga quando o custo anual do TN Manager Web ficar abaixo das licenças que substitui (orçamento da Dreamer em nov/2026)",
+    ]), { x: 5.5, y: 1.58, w: 3.92, h: 1.0, fontSize: 9 });
+    R(s, { x: 5.4, y: 2.68, w: 4.1, h: 0.62, fill: { color: "E3F3F7" } });
+    R(s, { x: 5.4, y: 2.68, w: 0.06, h: 0.62, fill: { color: C.teal } });
+    T(s, [{ text: "PecCode como parceira em automação: ", options: { bold: true, color: C.tealDark } }, { text: "se a fazenda quiser automação (balança, vagão, integração), indicamos a PecCode, porque ainda não temos. O web fica com o TN Manager." }], { x: 5.55, y: 2.68, w: 3.9, h: 0.62, fontSize: 9, color: C.text, valign: "middle" });
+    head(s, "Cobrança do cliente (proposta)", 5.4, 3.38, 4.1, C.magenta, 0.32, 10.5);
+    R(s, { x: 5.4, y: 3.7, w: 4.1, h: 1.02, fill: { color: C.magLight } });
     T(s, bullets([
       "Sem licença para o cliente",
       "Custo embutido no pacote de nutrição e serviço técnico, como previsto na v1.0",
       "Quem não compra nutrição TN: mensalidade de serviço técnico",
       "Modelo final na etapa de monetização (jan/2027)",
-    ]), { x: 5.5, y: 3.56, w: 3.92, h: 1.12, fontSize: 9 });
-    s.addNotes("Dados informados: 20 licenças pagas a empresas parceiras. TGC (Ponta): 6 licenças de R$ 10 mil a R$ 40 mil. PecCode: 14 licenças de R$ 8 mil a R$ 12,8 mil. Orçado R$ 364 mil, pago até agora R$ 64 mil. Faixas calculadas: TGC 6 x 10 a 40 mil = 60 a 240 mil; PecCode 14 x 8 a 12,8 mil = 112 a 179,2 mil; total 172 a 419 mil. Média: 364 mil / 20 = 18,2 mil por fazenda. Premissa: valores anuais; confirmar a periodicidade dos contratos. As fazendas TGC tendem a ser maiores e podem continuar no TGC até existir a versão com integração. Referência da v1.0 (2023): custo estimado de R$ 2.500 por cliente no app interno contra R$ 13.541 no TGC.");
+    ]), { x: 5.5, y: 3.75, w: 3.92, h: 0.95, fontSize: 9 });
+    s.addNotes("Dados informados: 20 licenças pagas a empresas parceiras. TGC (Ponta): 6 licenças de R$ 10 mil a R$ 40 mil. PecCode: 14 licenças de R$ 8 mil a R$ 12,8 mil. Orçado R$ 364 mil, pago até agora R$ 64 mil. Posição: tudo que for web passa a ser TN Manager Web; a PecCode continua como parceira quando a fazenda quiser automação (balança, vagão, integração), que a TN ainda não oferece. Faixas calculadas: TGC 6 x 10 a 40 mil = 60 a 240 mil; PecCode 14 x 8 a 12,8 mil = 112 a 179,2 mil; total 172 a 419 mil. Média: 364 mil / 20 = 18,2 mil por fazenda. Premissa: valores anuais; confirmar a periodicidade dos contratos. As fazendas TGC tendem a ser maiores e podem continuar no TGC até existir a versão com integração. Referência da v1.0 (2023): custo estimado de R$ 2.500 por cliente no app interno contra R$ 13.541 no TGC.");
   }
 
   // 7 SWOT
@@ -401,7 +402,7 @@ async function wave(alpha) {
       ["Atendimento técnico", ["Rodrigo analisa; técnicos de campo apoiam", "Analistas dedicados (1 para 20 fazendas)", "Núcleo de análise com método padrão", "Análise integrada à oferta comercial"]],
       ["Fazendas atendidas", ["20", "60", "120", "200"]],
       ["Analistas dedicados", ["0 (Rodrigo)", "3", "6", "10"]],
-      ["Licenças de terceiros", ["Migrar fazendas na faixa do produto", "Encerrar PecCode", "TGC só onde houver integração", "Sem licença de terceiros"]],
+      ["Licenças de terceiros", ["Migrar o que for web para o TN Manager", "PecCode só para automação", "TGC só onde houver integração", "Licença só para automação"]],
     ];
     lanes.forEach((l, i) => {
       const num = i === 2 || i === 3, h = num ? 0.42 : 0.56;
@@ -414,7 +415,7 @@ async function wave(alpha) {
       });
     });
     T(s, "Antes, em 2026: business case, pesquisa com 30 fazendas, imersão técnica e PRDs (out a dez).", { x: 0.5, y: 4.62, w: 4.4, h: 0.3, fontSize: 8.5, italic: true, color: C.navy });
-    s.addNotes("Metas de fazendas e analistas são propostas: 20 em 2027 (capacidade do Rodrigo), 60 em 2028, 120 em 2029 e 200 em 2030, alinhado à meta de 200 clientes da v1.0. Analistas na proporção de 1 para cada 20 fazendas. As funcionalidades por ano vêm da visão estratégica original: 2027 versão estável e integração com hardware; 2028 versão madura com NOA e complementos da AgTech Garage; 2029 fidelidade, clube de membros e benchmark; 2030 sustentabilidade, pegada de carbono e recomendação de produto. Licenças: priorizar a migração das 14 fazendas PecCode; manter TGC onde a integração com balança e vagão for indispensável até a versão que a ofereça.");
+    s.addNotes("Metas de fazendas e analistas são propostas: 20 em 2027 (capacidade do Rodrigo), 60 em 2028, 120 em 2029 e 200 em 2030, alinhado à meta de 200 clientes da v1.0. Analistas na proporção de 1 para cada 20 fazendas. As funcionalidades por ano vêm da visão estratégica original: 2027 versão estável e integração com hardware; 2028 versão madura com NOA e complementos da AgTech Garage; 2029 fidelidade, clube de membros e benchmark; 2030 sustentabilidade, pegada de carbono e recomendação de produto. Licenças: tudo que for web migra para o TN Manager Web; a PecCode segue como parceira para fazendas que quiserem automação, que ainda não temos; manter TGC onde a integração com balança e vagão for indispensável até a versão que a ofereça.");
   }
 
   // 11 Decisões
@@ -560,26 +561,48 @@ async function wave(alpha) {
   // 15 Mapa
   {
     const s = content("Onde estão os confinadores: 2.796 em 24 estados", "Rondônia, São Paulo e Mato Grosso somam 65% da base.", "Fonte: base de confinadores, out/2025 a jan/2026. Mapa: @svg-maps/brazil (CC BY 4.0).");
-    s.addImage({ path: __dirname + "/mapa-brasil.png", x: 0.55, y: 1.12, w: 3.55, h: 3.7 });
-    R(s, { x: 4.45, y: 1.22, w: 2.2, h: 1.05, fill: { color: C.navy } });
-    T(s, "2.796", { x: 4.6, y: 1.3, w: 2.0, h: 0.5, fontSize: 30, bold: true, color: C.white });
-    T(s, "confinadores mapeados", { x: 4.6, y: 1.84, w: 2.0, h: 0.3, fontSize: 10, color: C.white });
-    T(s, "Confinadores por estado", { x: 4.45, y: 2.42, w: 2.2, h: 0.22, fontSize: 9.5, bold: true, color: C.navy });
-    [["1B3A8C", "mais de 300"], ["4A79BF", "101 a 300"], ["9DBBDF", "21 a 100"], ["DCE7F3", "1 a 20"], ["EEF0F3", "sem dado"]].forEach((l, i) => {
-      R(s, { x: 4.45, y: 2.7 + i * 0.25, w: 0.3, h: 0.17, fill: { color: l[0] } });
-      T(s, l[1], { x: 4.83, y: 2.67 + i * 0.25, w: 1.6, h: 0.22, fontSize: 9, valign: "middle" });
+    const CEN = JSON.parse(require("fs").readFileSync(__dirname + "/mapa-centroides.json", "utf8"));
+    const Dv = { ac: 78, al: 3, am: 34, ba: 117, df: 4, es: 13, go: 93, ma: 1, mg: 200, ms: 161, mt: 341, pa: 77, pe: 3, pi: 3, pr: 94, rj: 8, rn: 11, ro: 1022, rr: 8, rs: 8, sc: 18, se: 5, sp: 461, to: 34 };
+    const RED = "D7263D", mx = 0.45, my = 1.1, k = 3.85 / 613;
+    s.addImage({ path: __dirname + "/mapa-brasil.png", x: mx, y: my, w: 613 * k, h: 639 * k });
+    const lbl = (uf, v, big) => [{ text: uf.toUpperCase() + " ", options: { bold: true, color: C.navy } }, { text: v.toLocaleString("pt-BR"), options: { bold: true, color: RED } }];
+    const tagAt = (uf, cx, cy, big) => {
+      const txt = uf + " " + Dv[uf].toLocaleString("pt-BR"), fs = big ? 12 : 10;
+      const w = 0.14 + txt.length * (big ? 0.085 : 0.07), h = big ? 0.27 : 0.23;
+      RR(s, { x: cx - w / 2, y: cy - h / 2, w, h, fill: { color: C.white }, line: { color: big ? RED : "B8C2CC", width: big ? 1.25 : 0.75 }, rectRadius: 0.05 });
+      T(s, lbl(uf, Dv[uf]), { x: cx - w / 2, y: cy - h / 2, w, h, fontSize: fs, align: "center", valign: "middle" });
+    };
+    const NUD = { go: [-10, 10], mg: [8, -6], sp: [6, 2], pa: [0, 10], am: [0, 10], ba: [6, 0], rs: [8, 0], ma: [-10, 4], pi: [-4, 6], to: [0, 0] };
+    ["ro", "sp", "mt", "mg", "ms", "ba", "pr", "go", "ac", "pa", "am", "to", "sc", "rs", "rr", "ma", "pi"].forEach((uf) => {
+      const n2 = NUD[uf] || [0, 0];
+      tagAt(uf, mx + (CEN[uf][0] + n2[0]) * k, my + (CEN[uf][1] + n2[1]) * k, ["ro", "sp", "mt"].includes(uf));
     });
-    T(s, "Maiores estados", { x: 6.95, y: 1.22, w: 2.5, h: 0.22, fontSize: 9.5, bold: true, color: C.navy });
+    let last = 0;
+    ["rn", "pe", "al", "se", "df", "es", "rj"].forEach((uf) => {
+      const px = mx + CEN[uf][0] * k, py = my + CEN[uf][1] * k;
+      const ty = Math.max(py, last + 0.28); last = ty;
+      LN(s, px, py, 4.42, ty, "8A939C", 0.75);
+      OV(s, { x: px - 0.03, y: py - 0.03, w: 0.06, h: 0.06, fill: { color: RED } });
+      tagAt(uf, 4.42 + 0.31, ty, false);
+    });
+    [["1B3A8C", "mais de 300"], ["4A79BF", "101 a 300"], ["9DBBDF", "21 a 100"], ["DCE7F3", "1 a 20"], ["EEF0F3", "sem dado"]].forEach((l, i) => {
+      R(s, { x: 0.45, y: 4.2 + i * 0.17, w: 0.24, h: 0.13, fill: { color: l[0] } });
+      T(s, l[1], { x: 0.75, y: 4.17 + i * 0.17, w: 1.0, h: 0.18, fontSize: 8, valign: "middle" });
+    });
+    R(s, { x: 5.3, y: 1.2, w: 4.2, h: 0.72, fill: { color: C.navy } });
+    T(s, "2.796", { x: 5.45, y: 1.2, w: 1.6, h: 0.72, fontSize: 30, bold: true, color: C.white, valign: "middle" });
+    T(s, "confinadores mapeados em 24 estados", { x: 7.05, y: 1.2, w: 2.35, h: 0.72, fontSize: 11, color: C.white, valign: "middle" });
+    T(s, "Maiores estados", { x: 5.3, y: 2.02, w: 2.5, h: 0.22, fontSize: 10, bold: true, color: C.navy });
     const top = [["RO", 1022], ["SP", 461], ["MT", 341], ["MG", 200], ["MS", 161], ["BA", 117], ["Outros 18", 495]];
     top.forEach((t, i) => {
-      const y = 1.5 + i * 0.33, w = 1.6 * t[1] / 1022;
-      T(s, t[0], { x: 6.95, y, w: 0.75, h: 0.24, fontSize: 9.5, bold: true, color: C.text, valign: "middle" });
-      R(s, { x: 7.7, y: y + 0.03, w, h: 0.18, fill: { color: i === 6 ? C.teal : i < 3 ? C.navy : "4A79BF" } });
-      T(s, t[1].toLocaleString("pt-BR"), { x: 7.75 + w, y, w: 0.6, h: 0.24, fontSize: 9, bold: true, color: C.text, valign: "middle" });
+      const y = 2.28 + i * 0.25, w = 2.4 * t[1] / 1022;
+      T(s, t[0], { x: 5.3, y, w: 0.8, h: 0.22, fontSize: 9.5, bold: true, color: C.text, valign: "middle" });
+      R(s, { x: 6.1, y: y + 0.03, w, h: 0.16, fill: { color: i === 6 ? C.teal : i < 3 ? C.navy : "4A79BF" } });
+      T(s, t[1].toLocaleString("pt-BR"), { x: 6.15 + w, y, w: 0.6, h: 0.22, fontSize: 9.5, bold: true, color: RED, valign: "middle" });
     });
-    R(s, { x: 4.45, y: 4.05, w: 5.05, h: 0.62, fill: { color: C.magLight } });
-    R(s, { x: 4.45, y: 4.05, w: 0.06, h: 0.62, fill: { color: C.magenta } });
-    T(s, [{ text: "Leitura: ", options: { bold: true, color: C.magenta } }, { text: "Rondônia tem 37% dos confinadores, mas não está entre os 5 estados com mais cabeças confinadas. São operações menores, o perfil do TN Manager Web." }], { x: 4.6, y: 4.05, w: 4.85, h: 0.62, fontSize: 9.5, color: C.text, valign: "middle" });
+    R(s, { x: 5.3, y: 4.1, w: 4.2, h: 0.62, fill: { color: C.magLight } });
+    R(s, { x: 5.3, y: 4.1, w: 0.06, h: 0.62, fill: { color: C.magenta } });
+    T(s, [{ text: "Leitura: ", options: { bold: true, color: C.magenta } }, { text: "Rondônia tem 37% dos confinadores, mas não está entre os 5 estados com mais cabeças confinadas. São operações menores, o perfil do TN Manager Web." }], { x: 5.45, y: 4.1, w: 4.0, h: 0.62, fontSize: 9, color: C.text, valign: "middle" });
     s.addNotes("Base informada: 2.796 confinadores, período de outubro de 2025 a janeiro de 2026 (confirmar o período exato). A soma dos estados dá 2.797, um a mais que o total: conferir. A sigla MD da planilha foi lida como MS (Mato Grosso do Sul). AP, CE e PB não aparecem na base. RO 1.022, SP 461, MT 341, MG 200, MS 161, BA 117, PR 94, GO 93, AC 78, PA 77, AM 34, TO 34, SC 18, ES 13, RN 11, RJ 8, RR 8, RS 8, SE 5, DF 4, AL 3, PE 3, PI 3, MA 1. RO, SP e MT somam 1.824, ou 65%. A leitura sobre Rondônia cruza com o censo dsm-firmenich 2025, em que MT, SP, GO, MS e MG somam 72% das cabeças e RO não aparece entre eles.");
   }
 
@@ -590,7 +613,7 @@ async function wave(alpha) {
     R(s, { x: 0, y: 0, w: 0.12, h: 5.625, fill: { color: C.lime } });
     T(s, "ANEXO", { x: 0.7, y: 1.9, w: 8, h: 0.3, fontSize: 12, bold: true, color: C.lime, charSpacing: 4 });
     T(s, "Material de apoio", { x: 0.7, y: 2.2, w: 8, h: 0.7, fontSize: 34, bold: true, color: C.white });
-    T(s, "Para usar se a diretoria perguntar: v1.0 x v2.0, problema de negócio, mapa de valor, perfil do piloto, objetivos, produto mínimo, pesquisa com 30 fazendas, critérios de avanço, riscos e stakeholders.", { x: 0.7, y: 3.0, w: 7.6, h: 0.7, fontSize: 12, color: "D6DCEB" });
+    T(s, "Para usar se a diretoria perguntar: problema de negócio, mapa de valor, perfil do piloto, objetivos, produto mínimo, pesquisa com 30 fazendas, critérios de avanço, riscos e stakeholders.", { x: 0.7, y: 3.0, w: 7.6, h: 0.7, fontSize: 12, color: "D6DCEB" });
   }
 
   await pres.writeFile({ fileName: OUT });
