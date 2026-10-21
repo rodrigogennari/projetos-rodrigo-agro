@@ -13,9 +13,9 @@ O slide 1 é a capa azul do Business Case; o slide 2 é a capa Nutreco. Cada sli
 | 1. De onde viemos | 4 a 7 | Por que mudar a v1.0? |
 | 2. Para quem | 8 a 13 | Quem é o cliente e existe mercado? |
 | 3. O que entregamos | 14 a 17 | Qual é o diferencial e como funciona? |
-| 4. Contra quem | 18 | O que a concorrência oferece? |
-| 5. Como crescemos | 19 a 23 | Quanto custa, como vendemos e como fidelizamos? |
-| 6. Até onde vamos | 24 a 26 | Qual o plano e o que decidir hoje? |
+| 4. Contra quem | 18 e 19 | O que a concorrência oferece e onde vamos vencer? |
+| 5. Como crescemos | 20 a 24 | Quanto custa, como vendemos e como fidelizamos? |
+| 6. Até onde vamos | 25 a 27 | Qual o plano e o que decidir hoje? |
 
 ## Falas e pontes
 
@@ -48,19 +48,21 @@ O slide 1 é a capa azul do Business Case; o slide 2 é a capa Nutreco. Cada sli
 
 - **Slide 18, Concorrência.** "Software todos têm: Cargill com Feed Manager, DSM com FarmTell, Ponta com o TGC. Atenção ao FarmTell Beef Smart, a versão simples da DSM para fazendas menores: é o concorrente mais parecido com a nossa versão Web. O que ninguém faz de perto é análise semanal para o confinamento médio."
 
+- **Slide 19, Onde vamos vencer.** "Todo concorrente tem sistema. Onde eles falham é no que vem depois: suporte fraco, implantação cara e dado parado. É aí que vamos vencer: suporte excelente, implantação simples e dashboards criativos. No longo prazo, o Grupo de Desenvolvimento fecha o ciclo: analistas auditam, validam e interpretam os dados e entregam o relatório de safra e o benchmark. O sistema é o meio; o que fazemos com os dados é o diferencial."
+
 **Capítulo 5: Como crescemos**
 
-- **Slide 19, Perfil do piloto.** "Começamos por fazendas com rotina mínima de registro."
-- **Slide 20, Custo-benefício.** "Hoje pagamos 20 licenças. Novos clientes sem automação vão para o TN Manager Web; os maiores com automação seguem com a PecCode."
-- **Slide 21, SWOT.** "Forças novas: ganho de tempo, benchmarking e comunidade. Ameaça nova: a DSM já tem versão simples."
-- **Slide 22, Go-to-market.** "Eu atendo as primeiras 20 fazendas; depois entram os analistas online." Ponte: "E o que mantém a fazenda com a gente depois do piloto?"
-- **Slide 23, Grupo de Desenvolvimento.** "Em 2020 criei o Fazenda Nota 10. A chave do longo prazo é repetir esse modelo com sistema: comunidade, indicadores, benchmarking, fechamento de safra e um evento anual com premiação. Analistas online cobram, auditam, validam e tiram dúvidas. A fazenda fica pelo grupo, não pelo sistema."
+- **Slide 20, Perfil do piloto.** "Começamos por fazendas com rotina mínima de registro."
+- **Slide 21, Custo-benefício.** "Hoje pagamos 20 licenças. Novos clientes sem automação vão para o TN Manager Web; os maiores com automação seguem com a PecCode."
+- **Slide 22, SWOT.** "Forças novas: ganho de tempo, benchmarking e comunidade. Ameaça nova: a DSM já tem versão simples."
+- **Slide 23, Go-to-market.** "Eu atendo as primeiras 20 fazendas; depois entram os analistas online." Ponte: "E o que mantém a fazenda com a gente depois do piloto?"
+- **Slide 24, Grupo de Desenvolvimento.** "Em 2020 criei o Fazenda Nota 10. A chave do longo prazo é repetir esse modelo com sistema: comunidade, indicadores, benchmarking, fechamento de safra e um evento anual com premiação. Analistas online cobram, auditam, validam e tiram dúvidas. A fazenda fica pelo grupo, não pelo sistema."
 
 **Capítulo 6: Até onde vamos**
 
-- **Slide 24, Roadmap de 15 meses.** "Do papel à fazenda até o fim de 2027, com o primeiro fechamento de safra do grupo piloto."
-- **Slide 25, Cronograma de 4 anos.** "Grupo lançado em 2028, com o primeiro evento anual. Em 2030, uma comunidade nacional de confinadores TN."
-- **Slide 26, Decisões.** Fechamento: "Começamos pelo começo: rotina, dado, análise e resultado. Com o grupo e o evento anual, a fazenda fica pela comunidade, e a TN ganha dados e fidelidade."
+- **Slide 25, Roadmap de 15 meses.** "Do papel à fazenda até o fim de 2027, com o primeiro fechamento de safra do grupo piloto."
+- **Slide 26, Cronograma de 4 anos.** "Grupo lançado em 2028, com o primeiro evento anual. Em 2030, uma comunidade nacional de confinadores TN."
+- **Slide 27, Decisões.** Fechamento: "Começamos pelo começo: rotina, dado, análise e resultado. Com o grupo e o evento anual, a fazenda fica pela comunidade, e a TN ganha dados e fidelidade."
 
 ## O que vale reforçar com dados próprios
 
