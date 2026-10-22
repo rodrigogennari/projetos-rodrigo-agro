@@ -1,4 +1,4 @@
-# Roteiro da apresentação: TN Manager Web para a diretoria (V9)
+# Roteiro da apresentação: TN Manager Web para a diretoria (V10)
 
 A história em uma frase: o TN Manager v1.0 começou pelo fim, pela automação e pelos grandes confinamentos. O TN Manager Web começa pela rotina do curral, é feito para novos clientes pequenos e médios, sem automação no momento, e termina no resultado do pecuarista. O sistema é o meio. O diferencial é o que fazemos com os dados: suporte, dashboards e equipe técnica. O que segura o cliente é o Grupo de Desenvolvimento.
 
@@ -15,8 +15,8 @@ As falas completas e as pontes entre os slides estão nas notas do apresentador.
 | 2. Mercado | 9 a 12 | Existe mercado para isso? |
 | 3. Solução e diferencial | 13 a 16 | O que entregamos e como funciona? |
 | 4. Concorrência | 17 e 18 | Onde vamos vencer? |
-| 5. Modelo de negócio | 19 a 23 | Quanto custa, como vendemos e como fidelizamos? |
-| 6. Plano e decisões | 24 a 26 | Qual o plano e o que decidir hoje? |
+| 5. Modelo de negócio | 19 a 25 | Quanto custa, como vendemos e como fidelizamos? |
+| 6. Plano e decisões | 26 a 28 | Qual o plano e o que decidir hoje? |
 
 ## Falas curtas
 
@@ -37,9 +37,9 @@ As falas completas e as pontes entre os slides estão nas notas do apresentador.
 15. **Concorrência (slide 17).** "Todos vendem sistema, mas falham em custo e suporte. Na Cargill, a implantação chega a R$ 240 mil."
 16. **Onde vamos vencer (slide 18).** "Suporte excelente, implantação simples, dashboards e equipe técnica."
 17. **Perfil do piloto, Custo-benefício, SWOT e Go-to-market (slides 19 a 22).** "Piloto de até 5 fazendas, depois eu atendo 20 e, a partir do mês 7, entram os analistas online."
-18. **Grupo de Desenvolvimento (slide 23).** "O modelo do Fazenda Nota 10, agora com sistema: relatório de safra, benchmark e evento anual com premiação."
-19. **Roadmap (slide 24).** "Alinhado ao cronograma do projeto até fevereiro de 2027; depois, as datas são definidas no Roadmap (6.1)."
-20. **Cronograma de 4 anos (slide 25)** e **Decisões (slide 26).** Fechamento: "O sistema é o meio. Suporte, dashboards e equipe técnica são o diferencial. Com o Grupo e o evento anual, a fazenda fica pela comunidade."
+18. **Grupo de Desenvolvimento (slides 23 a 25).** "Uma comunidade movida a dados: os analistas auditam, validam e interpretam; cada fazenda se compara com a meta, com a média do grupo e com as melhores. Toda semana há dashboard, a cada trimestre um relatório com comparações e, no fim da safra, a Reportagem de Safra. Uma vez por ano, o evento apresenta os resultados e premia as melhores fazendas e os técnicos destaque. O prêmio do técnico faz o consultor trazer mais fazendas."
+19. **Roadmap (slide 26).** "Alinhado ao cronograma do projeto até fevereiro de 2027; depois, as datas são definidas no Roadmap (6.1)."
+20. **Cronograma de 4 anos (slide 27)** e **Decisões (slide 28).** Fechamento: "O sistema é o meio. Suporte, dashboards e equipe técnica são o diferencial. Com o Grupo e o evento anual, a fazenda fica pela comunidade."
 
 ## Fontes que podem ser questionadas
 
