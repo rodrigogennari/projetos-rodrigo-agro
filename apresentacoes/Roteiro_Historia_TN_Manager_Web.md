@@ -1,70 +1,55 @@
-# Roteiro da apresentação: TN Manager Web para a diretoria
+# Roteiro da apresentação: TN Manager Web para a diretoria (V9)
 
-A apresentação conta uma história só. O TN Manager v1.0 começou pelo fim: automação, integração e grandes confinamentos. O TN Manager Web começa pela rotina do curral e termina no resultado do pecuarista. Sistema virou commodity. O que diferencia a TN é o que fazemos com o dado, e o que segura o cliente é a comunidade.
+A história em uma frase: o TN Manager v1.0 começou pelo fim, pela automação e pelos grandes confinamentos. O TN Manager Web começa pela rotina do curral, é feito para novos clientes pequenos e médios, sem automação no momento, e termina no resultado do pecuarista. O sistema é o meio. O diferencial é o que fazemos com os dados: suporte, dashboards e equipe técnica. O que segura o cliente é o Grupo de Desenvolvimento.
 
-O TN Manager Web é para novos clientes, de porte pequeno e médio, sem automação no momento. Clientes maiores que querem automação continuam com a PecCode, parceria consolidada e rodando bem. O TN Manager Automação será retomado no futuro, em paralelo com a versão Web.
+Os clientes maiores, que querem automação, continuam com a PecCode, uma parceria consolidada. O TN Manager Automação será retomado no futuro, em paralelo com a versão Web.
 
-O slide 1 é a capa azul do Business Case; o slide 2 é a capa Nutreco. Cada slide do corpo mostra o capítulo no canto superior direito. As falas sugeridas e as pontes entre slides estão nas notas do apresentador.
+As falas completas e as pontes entre os slides estão nas notas do apresentador.
 
-## Os seis capítulos
+## Estrutura
 
-| Capítulo | Slides | Pergunta que o capítulo responde |
+| Bloco | Slides | Pergunta que responde |
 |---|---|---|
-| 1. De onde viemos | 4 a 7 | Por que mudar a v1.0? |
-| 2. Para quem | 8 a 13 | Quem é o cliente e existe mercado? |
-| 3. O que entregamos | 14 a 17 | Qual é o diferencial e como funciona? |
-| 4. Contra quem | 18 e 19 | O que a concorrência oferece e onde vamos vencer? |
-| 5. Como crescemos | 20 a 24 | Quanto custa, como vendemos e como fidelizamos? |
-| 6. Até onde vamos | 25 a 27 | Qual o plano e o que decidir hoje? |
+| Capas e agenda | 1 a 3 | |
+| 1. Contexto e proposta | 4 a 8 | Por que mudar e para quem? |
+| 2. Mercado | 9 a 12 | Existe mercado para isso? |
+| 3. Solução e diferencial | 13 a 16 | O que entregamos e como funciona? |
+| 4. Concorrência | 17 e 18 | Onde vamos vencer? |
+| 5. Modelo de negócio | 19 a 23 | Quanto custa, como vendemos e como fidelizamos? |
+| 6. Plano e decisões | 24 a 26 | Qual o plano e o que decidir hoje? |
 
-## Falas e pontes
+## Falas curtas
 
-**Abertura (slide 3, Agenda).** "Vou contar como saímos de um projeto que começou pelo fim para um produto que começa pela rotina do curral e termina no resultado do pecuarista."
+1. **Capa azul e capa Nutreco (slides 1 e 2).**
+2. **Agenda (slide 3).** "Vou mostrar por que mudamos a lógica do TN Manager, para quem é a versão Web, o que nos diferencia e o que precisamos decidir hoje."
+3. **Resumo executivo (slide 4).** "A proposta em uma página."
+4. **Nossa história (slide 5).** "A v1.0 começou pelo fim. A Web começa pela rotina do curral, com inputs manuais e um sistema objetivo e flexível. Menos é mais: sistema virou commodity, o que manda é o resultado."
+5. **Target Customer (slide 6).** "Novos clientes de 200 a 2.000 cabeças, sem automação no momento."
+6. **Quem atende quem (slide 7).** "Sem automação, TN Manager Web. Com automação, PecCode hoje e TN Manager Automação no futuro."
+7. **v1.0 x v2.0 (slide 8).** "Medimos sucesso primeiro pelo uso e pela satisfação, depois pelo Sales Profit."
+8. **Bússola Farm (slide 9).** "São 14.038 confinamentos mapeados. 85% são pequenos, mas somam só 23% da capacidade."
+9. **Nossa base (slide 10).** "São 2.796 confinadores no nosso sistema, de janeiro a outubro de 2026. Rondônia tem 37% da base, com operações menores. Goiás tem espaço para crescer."
+10. **Nova geração (slide 11).** "Pela Embrapa, quem mais adota tecnologia no confinamento é o produtor mais jovem, com curso superior e consultoria. Só 22% dos produtores usam aplicativo de gestão."
+11. **Caminho certo (slide 12).** "Sim. A pesquisa com 30 fazendas, de 9 a 27 de novembro, vai confirmar com números."
+12. **Mapa de valor (slide 13).** "Todos ganham, mas o ganho está no que fazemos com o dado."
+13. **Diferencial (slide 14).** "O sistema é o meio. Suporte, indicadores e equipe técnica levam à rentabilidade da fazenda."
+14. **Como funciona (slide 15)** e **Na prática (slide 16).** "A fazenda registra; a TN transforma em decisão. No curral, não precisa de internet."
+15. **Concorrência (slide 17).** "Todos vendem sistema, mas falham em custo e suporte. Na Cargill, a implantação chega a R$ 240 mil."
+16. **Onde vamos vencer (slide 18).** "Suporte excelente, implantação simples, dashboards e equipe técnica."
+17. **Perfil do piloto, Custo-benefício, SWOT e Go-to-market (slides 19 a 22).** "Piloto de até 5 fazendas, depois eu atendo 20 e, a partir do mês 7, entram os analistas online."
+18. **Grupo de Desenvolvimento (slide 23).** "O modelo do Fazenda Nota 10, agora com sistema: relatório de safra, benchmark e evento anual com premiação."
+19. **Roadmap (slide 24).** "Alinhado ao cronograma do projeto até fevereiro de 2027; depois, as datas são definidas no Roadmap (6.1)."
+20. **Cronograma de 4 anos (slide 25)** e **Decisões (slide 26).** Fechamento: "O sistema é o meio. Suporte, dashboards e equipe técnica são o diferencial. Com o Grupo e o evento anual, a fazenda fica pela comunidade."
 
-**Capítulo 1: De onde viemos**
+## Fontes que podem ser questionadas
 
-- **Slide 4, Nossa história.** "A primeira versão foi desenhada do fim para o começo: automação, integração com balança e vagão, foco nos grandes. Entrei para inverter essa lógica. Menos é mais: um sistema simples, objetivo e flexível. Sistema virou commodity: 95% dos confinamentos que a Probeef analisa já usam software. O que manda é o resultado que ajudamos o pecuarista a alcançar."
-- **Slide 5, Quem atende quem.** "Para não haver dúvida: o TN Manager Web é para novos clientes, de porte pequeno e médio, e sem automação no momento. Os maiores, que querem automação, continuam com a PecCode: a parceria está consolidada e rodando bem. O TN Manager Automação volta no futuro, em paralelo com a Web."
-- **Slide 6, Resumo executivo.** "Em resumo, é isso que propomos." Ponte: "E o que muda em relação à primeira versão?"
-- **Slide 7, v1.0 x v2.0.** "A pergunta mudou: deixou de ser como defender a base e passou a ser para quem geramos valor."
-
-**Capítulo 2: Para quem**
-
-- **Slide 8, Target Customer.** "Confinamentos de 200 a 2.000 cabeças, que anotam em papel ou planilha." Ponte: "Quantos existem no Brasil?"
-- **Slide 9, Bússola Farm.** "São 11 mil confinamentos pequenos: 85% do total, com só 23% da capacidade. Muitas fazendas, pouco volume cada."
-- **Slide 10, Raio-X.** "Em cabeças, o mercado se concentra nos grandes, que já são disputados."
-- **Slide 11, Mapa.** "Rondônia tem 37% dos confinadores, mas não está entre os estados com mais cabeças: são operações menores, o nosso perfil."
-- **Slide 12, Nova geração.** "Quem está assumindo essas fazendas é outra geração. Nove em cada dez filhos de produtores ouvidos querem assumir a gestão. Querem praticidade, número e decisão, como empresa."
-- **Slide 13, Estamos no caminho certo?** "Sim, com uma ressalva: o valor vem do número de fazendas e da fidelização, não do Sales Profit de cada uma."
-
-**Capítulo 3: O que entregamos**
-
-- **Slide 14, Mapa de valor.** "Todos ganham, mas o valor não está na ferramenta."
-- **Slide 15, Diferencial.** "A ferramenta é item de prateleira. O nosso valor é a decisão que sai do dado."
-- **Slide 16, Como funciona.** "A fazenda registra. A TN transforma em decisão, toda semana."
-- **Slide 17, Na prática.** "Papel ou celular, sem internet no curral. Uma conexão por dia na sede basta."
-
-**Capítulo 4: Contra quem**
-
-- **Slide 18, Concorrência.** "Software todos têm: Cargill com Feed Manager, DSM com FarmTell, Ponta com o TGC. Atenção ao FarmTell Beef Smart, a versão simples da DSM para fazendas menores: é o concorrente mais parecido com a nossa versão Web. O que ninguém faz de perto é análise semanal para o confinamento médio."
-
-- **Slide 19, Onde vamos vencer.** "Todo concorrente tem sistema. Onde eles falham é no que vem depois: suporte fraco, implantação cara e dado parado. É aí que vamos vencer: suporte excelente, implantação simples e dashboards criativos. No longo prazo, o Grupo de Desenvolvimento fecha o ciclo: analistas auditam, validam e interpretam os dados e entregam o relatório de safra e o benchmark. O sistema é o meio; o que fazemos com os dados é o diferencial."
-
-**Capítulo 5: Como crescemos**
-
-- **Slide 20, Perfil do piloto.** "Começamos por fazendas com rotina mínima de registro."
-- **Slide 21, Custo-benefício.** "Hoje pagamos 20 licenças. Novos clientes sem automação vão para o TN Manager Web; os maiores com automação seguem com a PecCode."
-- **Slide 22, SWOT.** "Forças novas: ganho de tempo, benchmarking e comunidade. Ameaça nova: a DSM já tem versão simples."
-- **Slide 23, Go-to-market.** "Eu atendo as primeiras 20 fazendas; depois entram os analistas online." Ponte: "E o que mantém a fazenda com a gente depois do piloto?"
-- **Slide 24, Grupo de Desenvolvimento.** "Em 2020 criei o Fazenda Nota 10. A chave do longo prazo é repetir esse modelo com sistema: comunidade, indicadores, benchmarking, fechamento de safra e um evento anual com premiação. Analistas online cobram, auditam, validam e tiram dúvidas. A fazenda fica pelo grupo, não pelo sistema."
-
-**Capítulo 6: Até onde vamos**
-
-- **Slide 25, Roadmap de 15 meses.** "Do papel à fazenda até o fim de 2027, com o primeiro fechamento de safra do grupo piloto."
-- **Slide 26, Cronograma de 4 anos.** "Grupo lançado em 2028, com o primeiro evento anual. Em 2030, uma comunidade nacional de confinadores TN."
-- **Slide 27, Decisões.** Fechamento: "Começamos pelo começo: rotina, dado, análise e resultado. Com o grupo e o evento anual, a fazenda fica pela comunidade, e a TN ganha dados e fidelidade."
-
-## O que vale reforçar com dados próprios
-
-- **Resultados do Fazenda Nota 10.** Quantas fazendas participaram, quanto evoluíram e quantas continuam: é a melhor prova de que o modelo funciona.
-- **Concorrência.** Validar com quem usa: preço do FarmTell Beef Smart e do Feed Manager, e o que os clientes reclamam de cada um.
+- **Bússola Farm 2024/2025:** 14.038 confinamentos mapeados e 14.985.249 cabeças. As três faixas somam 13.214 confinamentos.
+- **Base de clientes Trouw:** jan a out/2026. A soma dos estados dá 2.797, um a mais que o total. A sigla "MD" foi lida como MS.
+- **Embrapa Pecuária Sudeste (2023):** estudo com 184 confinamentos. Quem mais adota tecnologia é o produtor mais jovem, com curso superior e consultoria.
+- **Embrapa, Sebrae e Inpe (2020):**
+  - 84% dos produtores usam alguma tecnologia digital;
+  - só 22% usam aplicativo de gestão;
+  - 61% apontam a conexão como principal barreira.
+- **Implantação Cargill até R$ 240 mil:** informação de mercado levantada pela TN.
+- **Licença TGC:** valores que a TN paga hoje.
+- **Suporte dos concorrentes:** avaliação interna e relatos de clientes, a confirmar na pesquisa com 30 fazendas.
